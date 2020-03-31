@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+function _proxy_show(){
+  (
+    echo "ALL_PROXY   [all_proxy]   = ${ALL_PROXY:--} [${all_proxy:--}]"
+    echo "HTTP_PROXY  [http_proxy]  = ${HTTP_PROXY:--} [${http_proxy:--}]"
+    echo "HTTPS_PROXY [https_proxy] = ${HTTPS_PROXY:--} [${https_proxy:--}]"
+    echo "RSYNC_PROXY [rsync_proxy] = ${RSYNC_PROXY:--} [${rsync_proxy:--}]"
+    echo "NO_PROXY    [no_proxy]    = ${NO_PROXY:--} [${no_proxy:--}]"
+  )
+}
+
+function _proxy_on(){
+  export ALL_PROXY=${CHARLES_PROXY}
+
+  export HTTP_PROXY=$ALL_PROXY
+  export http_proxy=$ALL_PROXY
+  export HTTPS_PROXY=$ALL_PROXY
+  export https_proxy=$ALL_PROXY
+  export ftp_proxy=$ALL_PROXY
+  export RSYNC_PROXY=$ALL_PROXY
+  export rsync_proxy=$ALL_PROXY
+  export NO_PROXY=$CHARLES_NO_PROXY
+  export no_proxy=$NO_PROXY
+}
+
+function _proxy_off(){
+  unset ALL_PROXY all_proxy \
+        HTTP_PROXY http_proxy \
+        HTTPS_PROXY https_proxy \
+        FTP_PROXY ftp_proxy \
+        RSYNC_PROXY rsync_proxy \
+        NO_PROXY no_proxy
+}
+
+case "$1" in
+  on) _proxy_on;;
+  off) _proxy_off;;
+  show) _proxy_show ;;
+  *) echo "Usage: $0 {on|off|show}"; return 1;;
+esac

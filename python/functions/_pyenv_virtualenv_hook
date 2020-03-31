@@ -1,0 +1,10 @@
+
+local ret=$?
+
+if [ -n "$VIRTUAL_ENV" ]; then
+  eval "$(pyenv sh-activate --quiet || pyenv sh-deactivate --quiet || true)" || true
+else
+  eval "$(pyenv sh-activate --quiet || true)" || true
+fi
+
+return $ret

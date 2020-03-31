@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+local __version="$1" __dir="${2}" __releases="https://github.com/i-tu/Hasklig/releases/download"
+local __files_dir="${__dir}/files" __tmpfile="${__dir}/Hasklig-${__version}.zip"
+
+mkdir -p ${__files_dir}
+
+wget --no-check-certificate \
+  -O "${__tmpfile}" \
+  "${__releases}/${__version}/Hasklig-${__version}.zip"
+
+unzip -d "${__files_dir}" ${__tmpfile}
+
+echo "Copying files from ${__files_dir} to ${FONTS_DIR}"
+
+find "${__files_dir}" -type f -name "*.otf" -print0 |
+    xargs -0 -n1 -I % cp "%" "$FONTS_DIR/"
+
+if command -v fc-cache @>/dev/null ; then
+  echo "Resetting font cache, this may take a moment..."
+  fc-cache -f $FONTS_DIR
+fi

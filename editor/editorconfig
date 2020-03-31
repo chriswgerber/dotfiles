@@ -1,0 +1,33 @@
+; Global Editorconfig
+root = true
+
+; Defaults
+[*]
+charset                  = utf-8
+end_of_line              = lf
+indent_style             = space
+insert_final_newline     = true
+max_line_length          = 200
+indent_size              = 2
+trim_trailing_whitespace = true
+
+[*.{mk,php,py,xml,markdown,mdjson,scss,config,gitconfig,gradle,groovy}]
+indent_size = 4
+
+[*.{cf.yml,cf.yaml}]
+indent_size = 4
+
+[{Makefile,config,gitconfig,Jenkinsfile}]
+indent_size = 4
+
+[package.json]
+indent_size = 2
+
+[*.{markdown,md}]
+trim_trailing_whitespace = false
+
+[*.{go,mk}]
+indent_style = tab
+
+[{Makefile,GNUmakefile}]
+indent_style = tab

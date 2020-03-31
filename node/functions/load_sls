@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+local \
+  _src_dir="${HOME}/.nvm/versions/node/v8.11.1" \
+  _src_inter_dir="/lib/node_modules/serverless/node_modules/tabtab/.completions"
+local \
+  _sls_complete="${_src_dir}${_src_inter_dir}/sls.zsh" \
+  _serverless_complete="${_src_dir}${_src_inter_dir}/serverless.zsh"
+
+loadnvm
+
+# tabtab source for serverless package
+test -f "${_serverless_complete}" && source "${_serverless_complete}"
+
+# tabtab source for sls package
+test -f "${_sls_complete}" && source "${_sls_complete}"

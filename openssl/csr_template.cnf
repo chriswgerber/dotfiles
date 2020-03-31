@@ -1,0 +1,51 @@
+# OpenSSL configuration to generate a new key with signing requst for a x509v3
+# multidomain certificate
+#
+# Run:
+# openssl req -config config-file.cnf -new -out $certName.csr
+
+certificateName   =
+primaryDomain     =
+secondaryDomain   =
+
+[ req ]
+default_bits       = 2048
+default_md         = sha256
+default_keyfile    = ${certificateName}.key
+prompt             = yes
+encrypt_key        = no
+distinguished_name = req_distinguished_name # base request
+req_extensions     = v3_req                 # extensions
+
+[ req_distinguished_name ] # distinguished_name
+# C=
+countryName_default  = "US"
+countryName          = countryName
+# ST=
+stateOrProvinceName_default = "Minnesota"
+stateOrProvinceName         = stateOrProvinceName
+# L=
+localityName_default  = "Minneapolis"
+localityName          = localityName
+# O=
+organizationName_default  = "Chris Gerber"
+organizationName          = organizationName
+# OU=
+organizationalUnitName_default  = "Web"
+organizationalUnitName          = organizationalUnitName
+# CN=
+commonName_default  = "${primaryDomain}"
+commonName          = commonName
+# CN/emailAddress=
+emailAddress_default           = "chriswgerber@gmail.com"
+
+[ v3_req ] # req_extensions
+# The subject alternative name extension allows various literal values to be
+# included in the configuration file
+# http://www.openssl.org/docs/apps/x509v3_config.html
+subjectAltName  = @alt_names
+
+[alt_names] # multidomain certificate
+DNS.1 = ${secondaryDomain}
+
+# vim:ft=config

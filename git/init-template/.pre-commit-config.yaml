@@ -1,0 +1,14 @@
+# pre-commit config
+#
+# Default Pre-Commit Config file.
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: 44e1753f98b0da305332abe26856c3e621c5c439
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-case-conflict
+    -   id: check-merge-conflict
+    -   id: check-yaml
+    -   id: check-json
+    -   id: pretty-format-json
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace

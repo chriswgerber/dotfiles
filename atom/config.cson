@@ -1,0 +1,189 @@
+"*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "f61fb929-0dc9-4c92-92ca-7ef69cce61f2"
+    yaml:
+      beautify_on_save: true
+      padding: 4
+  "atom-cfn-lint":
+    cfnLintExecutablePath: "/Users/cgerber/.dotfiles/.cache/Homebrew/bin/cfn-lint"
+  "atom-ide-ui":
+    "atom-ide-code-format":
+      formatOnSave: true
+      formatOnType: false
+    "atom-ide-diagnostics-ui":
+      autoVisibility: true
+    use: {}
+  "atom-material-ui":
+    colors:
+      accentColor: "#af0010"
+      genAccent: true
+      paintCursor: true
+    fonts:
+      fontSize: 14
+    tabs:
+      compactTabs: true
+      noTabMinWidth: true
+      stretchedTabs: true
+    ui:
+      panelContrast: true
+      panelShadows: true
+  "atom-python-test":
+    additionalArgs: "--verbose"
+    outputColored: true
+  "atom-python-virtualenv":
+    additionalVirtualEnvPaths: "$HOME/Projects/changehealthcare/chriswgerber/doppler/.virtualenv"
+    getWorkOnHome: "$HOME/.pyenv/versions"
+  "autocomplete-ruby":
+    rsensePath: "~/.rbenv/shims/rsense"
+  "city-lights-ui": {}
+  core:
+    audioBeep: false
+    disabledPackages: [
+      "json-schema"
+      "linter-foodcritic"
+      "language-mustache"
+      "linter"
+      "language-ansible"
+      "ide-python"
+      "ide-yaml"
+      "nyan-indent"
+      "rainbow-tree"
+      "rainbow"
+    ]
+    excludeVcsIgnoredPaths: false
+    openEmptyEditorOnStart: false
+    packagesWithKeymapsDisabled: [
+      "markdown-preview-plus"
+    ]
+    projectHome: "/Users/cgerber/Projects/"
+    telemetryConsent: "limited"
+    themes: [
+      "atom-material-ui"
+      "rainglow"
+    ]
+    titleBar: "custom"
+    warnOnLargeFileLimit: 10
+  docblockr:
+    auto_add_method_tag: true
+    deep_indent: true
+  editor:
+    fontSize: 29
+    lineHeight: 1.5
+    showIndentGuide: true
+  "exception-reporting":
+    userId: "447dc1a3-d506-b9c3-03ed-b925eb1d4d3e"
+  "file-types":
+    ".*.cf.yaml$": "source.yaml.cf"
+    ".*.cf.yml$": "source.yaml.cf"
+    ".*.cfyaml$": "source.yaml.cf"
+    ".*.cfyml$": "source.yaml.cf"
+    ".*.cloudformation.yaml$": "source.yaml.cf"
+    ".*.cloudformation.yml$": "source.yaml.cf"
+    ".*.tpl$": "text.html.mustache"
+    ".*/group_vars/.*": "source.ansible"
+    ".*/host_vars/.*": "source.ansible"
+    dhtml: "text.html.django"
+    j2: "source.ansible"
+    tpl: "text.html.mustache"
+    yml: "source.yaml"
+  "foldername-tabs":
+    mfpIdent: 10
+  "format-shell":
+    formatOnSave: true
+    indent: 4
+  "formatter-gofmt":
+    go:
+      arguments: [
+        "-w -s"
+      ]
+  "go-debug":
+    clearOutputOnStart: true
+    configurationFile: [
+      "~/.config/delve/config.json"
+    ]
+    panelInitialVisible: true
+  "go-outline": {}
+  "go-plus":
+    disabledBundledPackages: [
+      "hyperclick"
+    ]
+    format:
+      tool: "gofmt"
+    guru:
+      highlightIdentifiers: false
+    panel:
+      currentHeight: "14.857142857142858vh"
+      displayMode: "closed"
+      focusOnFailure: false
+    test:
+      runTestsOnSave: false
+      runTestsWithShortFlag: false
+  "ide-html": {}
+  "ide-python":
+    python: "python3"
+  jsonlint:
+    hideOnNoErrors: true
+  "linter-docker": {}
+  "linter-js-yaml":
+    customTags: [
+      "!Base64 mapping"
+      "!ImportValue mapping"
+      "!Ref scalar"
+      "!Sub scalar"
+      "!GetAZs scalar"
+      "!GetAtt scalar"
+      "!Condition scalar"
+      "!ImportValue scalar"
+      "!And sequence"
+      "!Equals sequence"
+      "!GetAtt sequence"
+      "!If sequence"
+      "!FindInMap sequence"
+      "!Join sequence"
+      "!Not sequence"
+      "!Or sequence"
+      "!Select sequence"
+      "!Sub sequence"
+      "!Split sequence"
+    ]
+  "linter-pydocstyle":
+    executablePath: "/Users/cgerber/projects/changehealthcare/chriswgerber/doppler/.virtualenv/bin/pydocstyle"
+  "linter-pylint": {}
+  "linter-rubocop":
+    command: "~/.rbenv/versions/2.4.2/bin/rubocop"
+    disableWhenNoConfigFile: true
+  "linter-ruby": {}
+  "linter-shellcheck":
+    enableNotice: true
+  "linter-terraform-syntax":
+    useTerraformFormat: true
+  "linter-ui-default":
+    panelHeight: 56
+  "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus":
+    useGitHubStyle: true
+    useLazyHeaders: false
+  "markdown-writer":
+    fileExtension: ".markdown, .md"
+    relativeImagePath: true
+  metrics:
+    userId: "bd8da5eaffaddaa769fd4ad385c9e7fbaaf8b5a8"
+  "nyan-indent":
+    opacity: 20
+  rainglow:
+    SelectSyntax: "peacocks-in-space-contrast-rainglow-syntax"
+  "release-notes":
+    viewedVersion: "0.80.0"
+  "ruby-test":
+    specFramework: "rspec"
+  "seti-syntax":
+    dynamicColor: false
+    themeColor: "Green"
+  "seti-ui":
+    compactView: true
+    themeColor: "Red"
+  "tree-view": {}
+  welcome:
+    showOnStartup: false

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# COMMIT_MSG=$1
+
+# # Check if commit ID has string, and attempts to set ID from branch name.
+# if [[ "$(grep '%_TICKET_ID_%' $COMMIT_MSG)" != "" ]]; then
+#   BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+#   TICKET_NAME=${BRANCH_NAME%%_*}
+#   sed -i '' "s/%_TICKET_ID_%/$TICKET_NAME/g" "$COMMIT_MSG"
+# fi
+
+COMMIT_MSG=$1
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+TICKET_NAME=${BRANCH_NAME%%_*}
+
+beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
+
+# Check if commit ID has string, and attempts to set ID from branch name.
+if ! beginswith "$TICKET_NAME" "$COMMIT_MSG"; then
+  COMMIT_MSG="$TICKET_NAME $COMMIT_MSG"
+fi

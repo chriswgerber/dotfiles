@@ -1,0 +1,13 @@
+Host bitbucket.org
+    ControlMaster no
+
+Host *
+    Compression         yes
+    ControlMaster       auto
+    ControlPath         /tmp/ssh-conn-%r@%h:%p.con
+    ControlPersist      30
+    ForwardAgent        yes
+    ServerAliveInterval 100
+    AddKeysToAgent      yes
+    # IdentitiesOnly      yes
+    PreferredAuthentications publickey

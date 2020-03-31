@@ -1,0 +1,14 @@
+###############
+# Digital Ocean
+---
+driver:
+  name: digitalocean
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-14.04-x64
+    driver_config:
+      image: 13089493
+      size: 512MB

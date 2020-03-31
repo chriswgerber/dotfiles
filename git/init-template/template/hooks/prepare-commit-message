@@ -1,0 +1,63 @@
+#!/bin/bash
+
+beginswith() { case $2 in "$1"*) true;; *) false;; esac; }
+
+prepend_ticket_name() {
+  # Add Ticket to the beginning of commit message if it's not there.
+  local msg ticket final
+
+  ticket=$1
+  msg=$2
+
+  if beginswith "$ticket" "$msg"; then
+    final="$msg"
+  else
+    final="$ticket $msg"
+  fi
+
+  echo "$final"
+}
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+TICKET_NAME=${BRANCH_NAME%%_*}
+
+# Git Hook Variables
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+# SHA1=$3
+
+COMMIT_TITLE=$(head -n 1 "${COMMIT_MSG_FILE}")
+COMMIT_MSG=$(tail -n "$(( $(wc -l "${COMMIT_MSG_FILE}" | awk '{print $1}') - 1 ))" "${COMMIT_MSG_FILE}")
+
+case $COMMIT_SOURCE in
+message) # Commit message is from -F/-m
+
+  MESSAGE_TITLE=$(prepend_ticket_name "$TICKET_NAME" "$COMMIT_TITLE")
+  echo -e "$MESSAGE_TITLE\n$COMMIT_MSG" > "${COMMIT_MSG_FILE}"
+  ;;
+
+template) # Commit message is from a template
+
+  MESSAGE_TITLE=$(prepend_ticket_name "$TICKET_NAME" "$COMMIT_TITLE")
+  echo -e "$MESSAGE_TITLE\n$COMMIT_MSG" > "${COMMIT_MSG_FILE}"
+  ;;
+
+commit) # Commit message is from -c/-C/--amend
+
+  MESSAGE_TITLE=$(prepend_ticket_name "$TICKET_NAME" "$COMMIT_TITLE")
+  echo -e "$MESSAGE_TITLE\n$COMMIT_MSG" > "${COMMIT_MSG_FILE}"
+  ;;
+
+merge)
+  true
+  ;;
+
+squash)
+  true
+  ;;
+
+*)
+  false
+  ;;
+
+esac
