@@ -1,6 +1,3 @@
 # Upgrade Ruby
 
-{
-  printf 'rbenv init - zsh'
-  printf "\n"
-} &> "${ZSH_CACHE_DIR}/rbenv.sh"
+(rbenv init - zsh) &> "${ZSH_CACHE_DIR}/rbenv.sh"
