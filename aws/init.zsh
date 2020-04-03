@@ -5,12 +5,10 @@
 
 source $HOMEBREW_REPOSITORY/opt/awscli/libexec/bin/aws_zsh_completer.sh
 
-# Aliases
-test -L $AWS_HOME/cli/alias || \
-  (
-    git clone git@github.com:awslabs/awscli-aliases.git $AWS_CLI_ALIASES && \
-    ln -s $AWS_CLI_ALIASES/alias $AWS_HOME/cli/alias
-  );
+# CLI Aliases
+-dot-install-github-repo "awslabs/awscli-aliases" "${AWS_CLI_ALIASES}"
+test -L $AWS_HOME/cli/alias || (ln -s $AWS_CLI_ALIASES/alias $AWS_HOME/cli/alias);
+
 
 # SCRIPT_DIR=$(dirname $(script_path $0))
 

@@ -23,6 +23,9 @@ export MAIN_ZSH="${DOTFILES_DIR}/main.zsh"
 
 export XDG_CONFIG_HOME="${HOME}/.config"
 
+if [ -d $HOME/projects ]; then
+    export PROJECTS="${HOME}/projects"
+fi
 
 case "$(ls /Users)" in
 *cgerber)
@@ -36,17 +39,6 @@ case "$(ls /Users)" in
   ;;
 esac
 
-# if test -d "/Users/cgerber"; then
-#     export DEFAULT_USER="cgerber"
-# elif test -d "/Users/chriswgerber"; then
-#     export DEFAULT_USER='chriswgerber'
-# else
-#     unset DEFAULT_USER
-# fi
-
-if [ -d $HOME/projects ]; then
-    export PROJECTS="${HOME}/projects"
-fi
 
 # Load system and user paths
 # ======================================
@@ -106,4 +98,3 @@ alias ssh-by-file="ssh -F .ssh-config"
 
 # Pretty JSON
 alias prettyjson="python -m json.tool"
-

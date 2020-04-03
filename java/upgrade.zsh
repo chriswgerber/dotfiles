@@ -1,6 +1,3 @@
 #!/usr/bin/env zsh
 
-(
-  printf 'jenv init - zsh'
-  printf '\n'
-) "${ZSH_CACHE_DIR}/jenv.sh"
+(jenv init - zsh) &> "${ZSH_CACHE_DIR}/jenv.sh"
