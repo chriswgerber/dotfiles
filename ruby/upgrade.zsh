@@ -1,3 +1,3 @@
 # Upgrade Ruby
 
-(rbenv init - zsh) &> "${ZSH_CACHE_DIR}/rbenv.sh"
+-dot-cache-update-file "rbenv.sh" "rbenv init - zsh"

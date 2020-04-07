@@ -1,3 +1,4 @@
 #!/bin/zsh
 
-(jenv init - zsh) &> "${ZSH_CACHE_DIR}/jenv.sh"
+
+-dot-cache-update-file "jenv.sh" "jenv init - zsh"

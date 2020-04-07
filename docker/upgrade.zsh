@@ -1,7 +1,9 @@
 #!/bin/zsh
 
-( kubectl completion zsh &> "${DOTFILES_DIR}/docker/completions/_kubectl" ) &
-( helm completion zsh &> "${DOTFILES_DIR}/docker/completions/_helm" ) &
-( eksctl completion zsh &> "${DOTFILES_DIR}/docker/completions/_eksctl" ) &
+_docker_comps_dir="${DOTFILES_DIR}/docker/completions"
+
+( kubectl completion zsh &> "${_docker_comps_dir}/_kubectl" ) &
+( helm completion zsh &> "${_docker_comps_dir}/_helm" ) &
+( eksctl completion zsh &> "${_docker_comps_dir}/_eksctl" ) &
 
 wait
