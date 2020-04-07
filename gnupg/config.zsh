@@ -1,5 +1,8 @@
-# SSH
+# GnuPG
+
+# Default GPG Key
 export DEFAULT_PGP_KEY="0x56CC6498381FD53F"
+export PGP_KEY_ID="0x56CC6498381FD53F"
 
 # export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 export GPGHOME=$HOME/.gnupg

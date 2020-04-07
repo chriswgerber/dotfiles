@@ -15,6 +15,7 @@ if ! test -d "${azimuth_dir}"; then
   unset __d
 fi
 
+
 # Main
 source "${azimuth_dir}/main.zsh"
 -dot-main
