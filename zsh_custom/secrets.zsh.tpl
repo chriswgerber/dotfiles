@@ -4,13 +4,13 @@
 #
 #    Set New Value:
 #
-#        keychain_set_value "URL" "USERNAME" "ADDL_ID"
+#        $ keychain_set_value "URL" "USERNAME" "ADDL_ID"
 #
 #    You will be prompted to enter the value.
 #
 #    Retrieve Value:
 #
-#        keychain_get_value "URL" "USERNAME" "ADDL_ID"
+#        $ keychain_get_value "URL" "USERNAME" "ADDL_ID"
 #
 
 # Set API Keys and other Application Secrets

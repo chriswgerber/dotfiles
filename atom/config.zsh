@@ -1,2 +1,2 @@
 # Atom Config
-export ATOM_HOME=$XDG_CONFIG_HOME/atom
+export ATOM_HOME="${XDG_CONFIG_HOME}/atom"

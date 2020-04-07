@@ -1,24 +1,22 @@
 #!/bin/zsh
 
-export LANG=en_US.UTF-8 # Default Language
-unsetopt autocd         # Disable AutoCD
-
+export MAIN_ZSH="${DOTFILES_DIR}/main.zsh"
 
 # ZSH
 # ======================================
-export ZSH="${DOTFILES_DIR}/.cache/oh-my-zsh"
-export ZSH_CACHE_DIR="${DOTFILES_DIR}/.cache"
-export ZSH_CUSTOM="${DOTFILES_DIR}/zsh_custom"
-export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
 
-export OMZ_REPO="https://github.com/robbyrussell/oh-my-zsh.git"
+export LANG=en_US.UTF-8 # Default Language
+unsetopt autocd         # Disable AutoCD
+
+export ZSH="${DOTFILES_DIR}/.cache/oh-my-zsh"
+export ZSH_CUSTOM="${DOTFILES_DIR}/zsh_custom"
+export ZSH_CACHE_DIR="${DOTFILES_DIR}/.cache"
+export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
 export ZSH_DISABLE_COMPFIX=false # Warn about insecure autoload files
 export DISABLE_AUTO_UPDATE=true
 
-export MAIN_ZSH="${DOTFILES_DIR}/main.zsh"
 
-
-# Config
+# Configs
 # ======================================
 
 export XDG_CONFIG_HOME="${HOME}/.config"
@@ -56,7 +54,6 @@ export MANPATH="$HOME/share/man:$MANPATH"
 
 # Themes
 # --------------------------------------
-# Choices
 # - agnoster
 # - ys
 # - Oxide https://github.com/dikiaap/dotfiles/blob/master/.oh-my-zsh/themes/oxide.zsh-theme

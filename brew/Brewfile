@@ -1,4 +1,3 @@
-tap "go-task/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-drivers"
@@ -6,17 +5,14 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "liamg/tfsec"
 tap "lucagrulla/cw"
-tap "weaveworks/tap"
+tap "teamookla/speedtest"
 # CLI for Amazon ECS to manage clusters and tasks for development
 brew "amazon-ecs-cli"
 # Automatic configure script builder
 brew "autoconf"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# Use AWS IAM credentials to authenticate to Kubernetes
-brew "aws-iam-authenticator"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Simple command-line tool to read AWS CloudWatch logs
@@ -31,26 +27,20 @@ brew "curl"
 brew "cwlogs"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
-# Docker Credential Helper for Amazon ECR
-brew "docker-credential-helper-ecr"
 # Maintain consistent coding style between multiple editors
 brew "editorconfig"
-# Image manipulation library
-brew "jpeg"
+# GNU internationalization (i18n) and localization (l10n) library
+brew "gettext"
 # TIFF library and utilities
 brew "libtiff"
 # Image format providing lossless and lossy compression for web images
 brew "webp"
-# GNU internationalization (i18n) and localization (l10n) library
-brew "gettext"
 # Distributed revision control system
 brew "git"
 # Git extension for versioning large files
 brew "git-lfs"
 # The official GitLab CI runner written in Go
 brew "gitlab-runner"
-# Interpreted, interactive, object-oriented programming language
-brew "python"
 # Library for USB device access
 brew "libusb"
 # Passphrase entry dialog utilizing the Assuan protocol
@@ -59,10 +49,8 @@ brew "pinentry"
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Go programming environment (1.12)
-brew "go@1.12"
-# Library access to GnuPG
-brew "gpgme"
+# Interpreted, interactive, object-oriented programming language
+brew "python", link: false
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -71,6 +59,8 @@ brew "graphviz"
 brew "helm"
 # Add GitHub support to git on the command-line
 brew "hub"
+# Manage your Java environment
+brew "jenv"
 # Regular expressions library
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
@@ -85,20 +75,20 @@ brew "libxml2"
 brew "libxmlsec1"
 # YAML Parser
 brew "libyaml"
-# Fast and user friendly build system
-brew "meson"
 # Platform built on V8 to build network applications
 brew "node"
 # Manage multiple Node.js versions
 brew "nvm"
-# 7-Zip (high compression file archiver) implementation
-brew "p7zip"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
 # Tool for creating identical machine images for multiple platforms
 brew "packer"
 # Highly capable, feature-rich programming language
 brew "perl"
 # Python package management tool
 brew "poetry"
+# Framework for managing multi-language pre-commit hooks
+brew "pre-commit"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Python version management
@@ -107,6 +97,8 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 # Implementation of Python 3 in Python
 brew "pypy3"
+# Ruby version manager
+brew "rbenv"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -117,18 +109,12 @@ brew "sslscan"
 brew "sslyze"
 # Generate scripting interfaces to C/C++ code
 brew "swig"
-# Tool to build, change, and version infrastructure
-brew "terraform", link: false
 # Tool to generate documentation from Terraform modules
 brew "terraform-docs"
 # Improve Terraform's plan output
 brew "terraform_landscape"
-# Thin wrapper for Terraform e.g. for locking state
-brew "terragrunt"
 # Terraform version manager inspired by rbenv
 brew "tfenv"
-# Linter for Terraform files
-brew "tflint"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vi 'workalike' with many additional features
@@ -143,36 +129,40 @@ brew "ykpers"
 brew "yubikeylockd", restart_service: true
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Static analysis powered security scanner for your terraform code
-brew "liamg/tfsec/tfsec"
 # The best way to tail AWS Cloudwatch Logs from your terminal
 brew "lucagrulla/cw/cw"
-# The official CLI for Amazon EKS
-brew "weaveworks/tap/eksctl"
+# Ookla Speedtest
+brew "teamookla/speedtest/speedtest"
 cask "avibrazil-rdm"
 cask "beyond-compare"
 cask "charles"
+cask "do-not-disturb"
 cask "docker"
+cask "firefox-developer-edition"
 cask "font-fira-code"
 cask "font-input"
 cask "font-iosevka"
 cask "font-jetbrains-mono"
 cask "font-monoid"
 cask "font-office-code-pro"
-cask "google-chat"
+cask "google-chrome"
 cask "gpg-suite"
-cask "insomnia"
-cask "intellij-idea-ce"
+cask "hex-fiend"
+cask "iterm2"
+cask "java"
 cask "keybase"
-cask "kitematic"
 cask "logitech-control-center"
 cask "logitech-options"
+cask "lulu"
+cask "nordvpn"
+cask "omnidisksweeper"
 cask "osxfuse"
 cask "pester"
-cask "pock"
 cask "postman"
-cask "signal"
+cask "prefs-editor"
 cask "slack"
-cask "telegram"
+cask "taskexplorer"
 cask "textmate"
+cask "tor-browser"
 cask "visual-studio-code"
+cask "whatsyoursign"
