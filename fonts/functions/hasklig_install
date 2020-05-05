@@ -8,8 +8,7 @@ fi
 
 mkdir -p ${__files_dir}
 
-wget --no-check-certificate \
-  -O "${__tmpfile}" \
+curl -sLo "${__tmpfile}" \
   "${__releases}/${__version}/Hasklig-${__version}.zip"
 
 unzip -d "${__files_dir}" "${__tmpfile}"

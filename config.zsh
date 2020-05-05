@@ -2,6 +2,8 @@
 
 export MAIN_ZSH="${DOTFILES_DIR}/main.zsh"
 
+export GIT_PROTOCOL="https"
+
 # ZSH
 # ======================================
 
@@ -75,23 +77,8 @@ plugins=(colored-man-pages docker git golang gradle osx python)
 # ======================================
 -dot-install-omz
 
-# Aliases
-# ======================================
 
-# Tree
-alias tree="tree -C"
-
-# Open `man` in preview
-alias open-man="man-preview"
-
-# Edit Hostsfile
-alias edit_hosts="vim /etc/hosts"
-
-# rsync_project - Rsyncs from local directory to destination, preserving user
-alias rsync_project="rsync -rlptv --exclude '.*' --rsync-path=\"sudo -u saml rsync\" --delete ~/src dest:dir"
-
-# ssh-by-file - SSH using a file.
-alias ssh-by-file="ssh -F .ssh-config"
-
-# Pretty JSON
-alias prettyjson="python -m json.tool"
+# Upgrade Ignore
+# --------------------------------------
+# Cached directories to ignore in upgrade.
+export DOT_UPGRADE_IGNORE=(Homebrew)
