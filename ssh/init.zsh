@@ -2,7 +2,7 @@
 -dot-add-symlink-to-home ssh/config-template .ssh/config-template
 
 (
-  if [[ -z "`pgrep ssh-agent`" ]]; then
+  if test -z "$(pgrep ssh-agent)"; then
     eval $(ssh-agent)
     ssh-add
   fi

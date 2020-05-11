@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+echo "${CLOUDSDK_ACTIVE_CONFIG_NAME}";

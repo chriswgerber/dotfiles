@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 # Burgers theme for Oh My Zsh
 # License: MIT
 
@@ -61,6 +61,12 @@ function burgers_prompt_aws {
 
     (test -n $AWS_PROFILE && _prompt_profile=$AWS_PROFILE) || true
     [ "$_prompt_profile" ] && echo "%{$orange%}aws:%U$_prompt_profile%u%{$PR_RST%} "
+}
+
+function burgers_prompt_gcp {
+    local _prompt_profile=$(gcpgp)
+
+    test "$_prompt_profile" && echo "%{$yellow%}gcp:%U$_prompt_profile%u%{$PR_RST%} "
 }
 
 function burgers_prompt_exitcode {
@@ -129,6 +135,7 @@ function burgers_prompt() {
   _brompt="$(burgers_prompt_path)"
   _brompt+="$(burgers_prompt_vcs)"
   _brompt+="$(burgers_prompt_pyenv)"
+  _brompt+="$(burgers_prompt_gcp)"
   _brompt+="$(burgers_prompt_aws)"
   _brompt+="$(burgers_prompt_exitcode)"
   _brompt+="\n"

@@ -18,4 +18,4 @@ fi
 
 # Main
 source "${azimuth_dir}/main.zsh"
--dot-main
+-dot-main ${DOTFILES_DIR}

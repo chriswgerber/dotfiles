@@ -1,4 +1,9 @@
 # Python
 
 # Pushbullet
-export PUSHBULLET_API_KEY="$(keychain_get_value 'https://api.pushbullet.com/' ${EMAIL_ADDRESS})"
+function export_pushbullet_key() {
+  local api_url='https://api.pushbullet.com/'
+
+  export PUSHBULLET_API_KEY="$(keychain_get_value ${api_url} ${EMAIL_ADDRESS})"
+}
+# export_pushbullet_key
