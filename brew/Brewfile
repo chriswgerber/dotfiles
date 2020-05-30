@@ -21,8 +21,6 @@ brew "awslogs"
 brew "bat"
 # GNU internationalization (i18n) and localization (l10n) library
 brew "gettext"
-# Fish completion for brew-cask
-brew "brew-cask-completion"
 # Reimplementation of ctags(1)
 brew "ctags"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -51,6 +49,8 @@ brew "pinentry"
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Interpreted, interactive, object-oriented programming language
+brew "python", link: false
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -85,8 +85,6 @@ brew "openssh"
 brew "packer"
 # Highly capable, feature-rich programming language
 brew "perl"
-# Interpreted, interactive, object-oriented programming language
-brew "python", link: false
 # Python package management tool
 brew "poetry"
 # Framework for managing multi-language pre-commit hooks
@@ -117,8 +115,6 @@ brew "terraform-docs"
 brew "terraform_landscape"
 # Terraform version manager inspired by rbenv
 brew "tfenv"
-# Simplified and community-driven man pages
-brew "tldr"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vi 'workalike' with many additional features
@@ -130,7 +126,7 @@ brew "yarn"
 # YubiKey personalization library and tool
 brew "ykpers"
 # Simple daemon for locking and unlocking macOS with Yubikey.
-brew "yubikeylockd"
+brew "yubikeylockd", restart_service: true
 # Additional completion definitions for zsh
 brew "zsh-completions"
 # The best way to tail AWS Cloudwatch Logs from your terminal
@@ -149,15 +145,17 @@ cask "font-iosevka"
 cask "font-jetbrains-mono"
 cask "font-monoid"
 cask "font-office-code-pro"
+cask "google-chat"
 cask "google-chrome"
+cask "google-cloud-sdk"
+cask "google-hangouts"
 cask "gpg-suite"
 cask "hex-fiend"
 cask "iterm2"
 cask "java"
 cask "keybase"
-cask "logitech-camera-settings"
+cask "logitech-control-center"
 cask "logitech-options"
-cask "logitech-presentation"
 cask "lulu"
 cask "microsoft-teams"
 cask "nordvpn"

@@ -1,0 +1,6 @@
+title = "Hub Config"
+
+[[hosts]]
+protocol = "ssh"
+host     = "github.com"
+user     = "thatgerber"

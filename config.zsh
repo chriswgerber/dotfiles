@@ -80,5 +80,5 @@ plugins=(colored-man-pages docker git golang gradle osx python)
 
 # Upgrade Ignore
 # --------------------------------------
-# Cached directories to ignore in upgrade.
+# Directories in cache to ignore during upgrade.
 export DOT_UPGRADE_IGNORE=(Homebrew)

@@ -4,18 +4,24 @@ export DOTFILES_DIR=$(dirname $0)
 
 # Azimuth Framework Library
 # --------------------------------------
-azimuth_dir="${DOTFILES_DIR}/.cache/azimuth"
+function init_azimuth() {
+  local _tmp \
+    _repo_loc="https://github.com/ThatGerber/azimuth.git" \
+    _azimuth="${1:=${DOTFILES_DIR}/.cache/azimuth}"
 
-if ! test -d "${azimuth_dir}"; then
-  mkdir -p "$(dirname ${azimuth_dir})";
-  __d=$(git -C "${azimuth_dir}" remote -v &>/dev/null)
-  if test $? -ne 0; then
-    git clone https://github.com/ThatGerber/azimuth.git ${azimuth_dir};
+  if ! test -d "${_azimuth}"; then
+    mkdir -p "$(dirname ${_azimuth})";
+    _tmp=$(git -C "${_azimuth}" remote -v &>/dev/null)
+    if test $? -ne 0; then
+      git clone "${_repo_loc}" ${_azimuth};
+    fi
   fi
-  unset __d
-fi
+
+  printf "%s" "${azimuth}"
+}
 
 
 # Main
-source "${azimuth_dir}/main.zsh"
+source "${init_azimuth}/main.zsh"
+
 -dot-main ${DOTFILES_DIR}

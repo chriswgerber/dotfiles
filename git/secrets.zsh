@@ -11,15 +11,15 @@ function export_gitlab_token() {
   export GITLAB_API_TOKEN="$GITLAB_TOKEN"
   export GITLAB_API_PRIVATE_TOKEN="$GITLAB_TOKEN"
 }
-# export_gitlab_token
 
 
-# Github Gist-only key
-export GITHUB_USERNAME="thatgerber"
+# Github
+export GITHUB_USER="thatgerber"
+export GITHUB_HOST="thatgerber"
 
 function export_gitlab_gist_key() {
   local github_gist_url='https://gist.github.com/'
 
-  export GITHUB_GIST_KEY="$(keychain_get_value ${github_gist_url} ${GITHUB_USERNAME})"
+  export GITHUB_GIST_KEY="$(keychain_get_value ${github_gist_url} ${GITHUB_USER})"
 }
-# export_gitlab_gist_key
+

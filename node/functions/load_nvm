@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+source "${HOMEBREW_REPOSITORY}/opt/nvm/nvm.sh"

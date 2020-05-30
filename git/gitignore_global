@@ -21,10 +21,6 @@ nbproject
 *.sass-cache
 .zkbd/
 *.css.map
-/scratch
-/bundle/
-/.bundle/
-/node_modules/
 
 .AppleDouble
 .LSOverride
@@ -45,3 +41,13 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Ruby
+/bundle/
+/.bundle/
+
+# Node
+/node_modules/
+
+# Extra
+/scratch

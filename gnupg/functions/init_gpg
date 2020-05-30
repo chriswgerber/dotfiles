@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+if test -z "$(pgrep gpg-agent)" -a -n $(command -v gpg-agent); then
+  (gpg-agent --daemon --log-file "${GPG_LOG_FILE}") 1>/dev/null
+fi
