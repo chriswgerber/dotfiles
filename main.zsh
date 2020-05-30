@@ -17,11 +17,11 @@ function init_azimuth() {
     fi
   fi
 
-  printf "%s" "${azimuth}"
+  printf "%s" "${_azimuth}"
 }
 
 
 # Main
-source "${init_azimuth}/main.zsh"
+source "$(init_azimuth)/main.zsh"
 
 -dot-main ${DOTFILES_DIR}
