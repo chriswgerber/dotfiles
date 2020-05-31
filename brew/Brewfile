@@ -7,131 +7,62 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "lucagrulla/cw"
 tap "teamookla/speedtest"
-# CLI for Amazon ECS to manage clusters and tasks for development
-brew "amazon-ecs-cli"
-# Automatic configure script builder
 brew "autoconf"
-# Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# Official Amazon AWS command-line interface
 brew "awscli"
-# Simple command-line tool to read AWS CloudWatch logs
 brew "awslogs"
-# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# GNU internationalization (i18n) and localization (l10n) library
 brew "gettext"
-# Reimplementation of ctags(1)
 brew "ctags"
-# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
-# CLI tool for reading logs from Cloudwatch Logs
 brew "cwlogs"
-# Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
-# Maintain consistent coding style between multiple editors
 brew "editorconfig"
-# TIFF library and utilities
 brew "libtiff"
-# Image format providing lossless and lossy compression for web images
 brew "webp"
-# Distributed revision control system
 brew "git"
-# Git extension for versioning large files
 brew "git-lfs"
-# The official GitLab CI runner written in Go
-brew "gitlab-runner"
-# Library for USB device access
 brew "libusb"
-# Passphrase entry dialog utilizing the Assuan protocol
 brew "pinentry"
-# GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
-# Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Interpreted, interactive, object-oriented programming language
-brew "python", link: false
-# Generic library support script
 brew "libtool"
-# Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
-# The Kubernetes package manager
-brew "helm"
-# Add GitHub support to git on the command-line
 brew "hub"
-# Manage your Java environment
 brew "jenv"
-# Regular expressions library
 brew "oniguruma"
-# Lightweight and flexible command-line JSON processor
 brew "jq"
-# Kubernetes command-line interface
-brew "kubernetes-cli"
-# Host-side of the Universal 2nd Factor (U2F) protocol
 brew "libu2f-host"
-# GNOME XML library
 brew "libxml2"
-# XML security library
 brew "libxmlsec1"
-# YAML Parser
 brew "libyaml"
-# Platform built on V8 to build network applications
 brew "node"
-# Manage multiple Node.js versions
 brew "nvm"
-# OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
-# Tool for creating identical machine images for multiple platforms
 brew "packer"
-# Highly capable, feature-rich programming language
 brew "perl"
-# Python package management tool
 brew "poetry"
-# Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
-# Protocol buffers (Google's data interchange format)
 brew "protobuf"
-# Python version management
 brew "pyenv"
-# Pyenv plugin to manage virtualenv
 brew "pyenv-virtualenv"
-# Implementation of Python 3 in Python
 brew "pypy3"
-# Ruby version manager
+brew "python", link: false
 brew "rbenv"
-# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
-# Autoformat shell script source code
 brew "shfmt"
-# Test SSL/TLS enabled services to discover supported cipher suites
 brew "sslscan"
-# SSL scanner
 brew "sslyze"
-# Generate scripting interfaces to C/C++ code
 brew "swig"
-# Tool to generate documentation from Terraform modules
 brew "terraform-docs"
-# Improve Terraform's plan output
-brew "terraform_landscape"
-# Terraform version manager inspired by rbenv
 brew "tfenv"
-# Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Vi 'workalike' with many additional features
 brew "vim"
-# Internet file retriever
 brew "wget"
-# JavaScript package manager
 brew "yarn"
-# YubiKey personalization library and tool
 brew "ykpers"
-# Simple daemon for locking and unlocking macOS with Yubikey.
-brew "yubikeylockd", restart_service: true
-# Additional completion definitions for zsh
 brew "zsh-completions"
-# The best way to tail AWS Cloudwatch Logs from your terminal
 brew "lucagrulla/cw/cw"
-# Ookla Speedtest
 brew "teamookla/speedtest/speedtest"
 cask "avibrazil-rdm"
 cask "beyond-compare"
@@ -148,13 +79,10 @@ cask "font-office-code-pro"
 cask "google-chat"
 cask "google-chrome"
 cask "google-cloud-sdk"
-cask "google-hangouts"
 cask "gpg-suite"
 cask "hex-fiend"
 cask "iterm2"
-cask "java"
 cask "keybase"
-cask "logitech-control-center"
 cask "logitech-options"
 cask "lulu"
 cask "microsoft-teams"
@@ -170,3 +98,4 @@ cask "textmate"
 cask "tor-browser"
 cask "visual-studio-code"
 cask "whatsyoursign"
+cask "zoomus"
