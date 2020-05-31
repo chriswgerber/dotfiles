@@ -1,0 +1,71 @@
+#!/bin/zsh -v
+
+function install_dotfiles() {
+  # ================
+  # Install Dotfiles
+  #
+
+  local \
+    _install_dir="${DOTFILES_DIR:=$HOME/.dotfiles}" \
+    _git="$(command -v git)" \ # We run this to check for command line tools.
+    _repo="https://github.com/ThatGerber/dotfiles.git"
+
+  # Check for Azimuth and if it's there, we don't need to install.
+  command -v -dot-main &&
+    { echo "Exiting because it appears to already be installed." && return 1 }
+
+  # Verify status before doing anything with the directory
+  if test -e "${_install_dir}"; then # Exists
+    if ! test -d "${_install_dir}"; then # Is not a directory
+      { echo "${_install_dir} exists, but is not a directory; exiting." &&
+        return 1 }
+    fi
+    if test -n $(ls ${_install_dir}); then # Has things in it
+      { echo "${_install_dir} is not empty; exiting." &&
+        return 1 }
+    fi
+  else # Does not exist
+    mkdir -p "${_install_dir}" || true
+  fi
+
+  (
+    cd "${_install_dir}" || return 2
+
+    ${_git} init
+    ${_git} remote add origin "${_repo}"
+    ${_git} branch --set-upstream-to=origin/master
+    ${_git} pull
+  )
+
+  setup_dotfiles_zsh "${_install_dir}"
+}
+
+function setup_dotfiles_zsh() {
+  # ================
+  # Setup ZSH to use dotfiles.
+  #
+
+  local _install_dir="${1}"
+
+  printf '#!/bin/zsh\n\nsource "%s/main.zsh";\n' ${_install_dir} > $HOME/.zshrc
+
+  sudo chsh -s /bin/zsh $(whoami)
+  exec "$SHELL"
+}
+
+function run_local_install() {
+  # ================
+  # Install Brew packages
+  #
+
+  local __install_bundle=${+INSTALL_BREW_BUNDLE}
+
+  command -v "-dot-install-brew-bundle" || return 1
+
+  if test ${_install_bundle} > 0 {
+    -dot-install-brew-bundle
+  }
+}
+
+install_dotfiles
+run_local_install
