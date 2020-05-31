@@ -1,2 +1,2 @@
--dot-add-symlink-to-home vscode/settings.json Library/Application\ Support/Code/User/settings.json
--dot-add-symlink-to-home vscode/vsicons.settings.json Library/Application\ Support/Code/User/vsicons.settings.json
+-dot-add-symlink-to-home vscode/settings.json "Library/Application Support/Code/User/settings.json"
+-dot-add-symlink-to-home vscode/vsicons.settings.json "Library/Application Support/Code/User/vsicons.settings.json"

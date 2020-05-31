@@ -200,5 +200,6 @@
         "window-title": "12px", // Window title font when using custom titlebar
         "tab-title": "12px"     // Used for editor tab titles
     },
-    "workbench.colorTheme": "GitHub Sharp"
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+    "todo-tree.tree.showScanModeButton": false
 }
