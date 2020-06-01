@@ -65,7 +65,7 @@ ZSH_THEME="burgers"
 
 # PLUGINS
 # --------------------------------------
-plugins=(colored-man-pages docker git golang gradle osx python)
+plugins=(colored-man-pages docker git github golang gradle iterm2 keychain osx python terraform)
 
 # Remote plugins
 -dot-install-github-plugin zsh-users/zsh-completions

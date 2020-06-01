@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+#zstyle :omz:plugins:keychain agents gpg,ssh
+
 -dot-source-dotfile "${ZSH}/oh-my-zsh.sh" # Init OMZ
 
 if test -n "${ZSH_DEBUG}"; then # Load ZSH profiling mod

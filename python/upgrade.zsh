@@ -1,7 +1,6 @@
 #!/bin/zsh
 
-_py_comps_dir="${DOTFILES_DIR}/python/completions"
-(poetry completions zsh) &> "${_py_comps_dir}/_poetry"
+-dot-upgrade-completion poetry "${DOTFILES_DIR}/python/completions"
 
 -dot-cache-update-file "pyenv.sh" "pyenv init - zsh"
 
