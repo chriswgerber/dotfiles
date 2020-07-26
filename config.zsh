@@ -1,19 +1,21 @@
 #!/bin/zsh
 
+export ZSH_DEBUG=1
+
 export MAIN_ZSH="${DOTFILES_DIR}/main.zsh"
-
 export GIT_PROTOCOL="https"
-
-# ZSH
-# ======================================
 
 export LANG=en_US.UTF-8 # Default Language
 unsetopt autocd         # Disable AutoCD
 
-export ZSH="${DOTFILES_DIR}/.cache/oh-my-zsh"
-export ZSH_CUSTOM="${DOTFILES_DIR}/zsh_custom"
-export ZSH_CACHE_DIR="${DOTFILES_DIR}/.cache"
+# ZSH
+# ======================================
+export DOT_CACHE_DIR="${DOTFILES_DIR}/.cache"
+export ZSH="${DOT_CACHE_DIR}/oh-my-zsh"
+export ZSH_CACHE_DIR="${DOT_CACHE_DIR}"
+export ZSH_CUSTOM="${ZSH_CACHE_DIR}/zsh_custom"
 export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
+
 export ZSH_DISABLE_COMPFIX=false # Warn about insecure autoload files
 export DISABLE_AUTO_UPDATE=true
 
@@ -24,12 +26,15 @@ export DISABLE_AUTO_UPDATE=true
 export XDG_CONFIG_HOME="${HOME}/.config"
 
 if [ -d $HOME/projects ]; then
-    export PROJECTS="${HOME}/projects"
+    export PROJECTS="${HOME}/Projects"
 fi
 
 case "$(ls /Users)" in
 *cgerber)
   export DEFAULT_USER="cgerber"
+  ;;
+*cgerber2)
+  export DEFAULT_USER='cgerber2'
   ;;
 *chriswgerber)
   export DEFAULT_USER='chriswgerber'
@@ -54,18 +59,35 @@ export MANPATH="/usr/local/man:$MANPATH"
 export MANPATH="$HOME/share/man:$MANPATH"
 
 
+# Install OMZ
+# ======================================
+-dot-install-omz
+
+
 # Themes
 # --------------------------------------
 # - agnoster
 # - ys
 # - Oxide https://github.com/dikiaap/dotfiles/blob/master/.oh-my-zsh/themes/oxide.zsh-theme
 # - burgers (local)
-ZSH_THEME="burgers"
+ZSH_THEME=""
 
 
 # PLUGINS
 # --------------------------------------
-plugins=(colored-man-pages docker git github golang gradle iterm2 keychain osx python terraform)
+plugins=(
+  colored-man-pages
+  docker
+  git
+  github
+  golang
+  gradle
+  iterm2
+  keychain
+  osx
+  python
+  terraform
+)
 
 # Remote plugins
 -dot-install-github-plugin zsh-users/zsh-completions
@@ -73,12 +95,12 @@ plugins=(colored-man-pages docker git github golang gradle iterm2 keychain osx p
 -dot-install-github-plugin zsh-users/zsh-syntax-highlighting
 
 
-# Install OMZ
-# ======================================
--dot-install-omz
-
-
 # Upgrade Ignore
 # --------------------------------------
 # Directories in cache to ignore during upgrade.
-export DOT_UPGRADE_IGNORE=(Homebrew)
+DOT_UPGRADE_IGNORE=(
+  Homebrew
+  oh-my-zsh
+  zsh_custom
+)
+export DOT_UPGRADE_IGNORE

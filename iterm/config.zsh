@@ -1,2 +1,5 @@
 # Iterm
-export ITERM_THEMES_DIR="${ZSH_CACHE_DIR}/iterm-themes"
+
+-dot-add-fpath "${DOTFILES_DIR}/iterm/functions"
+
+export ITERM_THEMES_DIR="${DOT_CACHE_DIR}/iterm-themes"

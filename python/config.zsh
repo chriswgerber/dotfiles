@@ -1,5 +1,11 @@
 # Python
 
+-dot-add-fpath "${DOTFILES_DIR}/python/functions"
+-dot-add-fpath "${DOTFILES_DIR}/python/completions"
+
+# Add local functions
+-dot-add-path "${DOTFILES_DIR}/python/libexec"
+
 export PYTHONIOENCODING='utf8'
 
 # Use Homebrew Python

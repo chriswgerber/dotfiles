@@ -2,9 +2,10 @@
 
 export DOTFILES_DIR=$(dirname $0)
 
-# Azimuth Framework Library
-# --------------------------------------
 function init_azimuth() {
+  # Azimuth Framework Library
+  # -------------------------
+
   local _tmp \
     _repo_loc="https://github.com/ThatGerber/azimuth.git" \
     _azimuth="${1:=${DOTFILES_DIR}/.cache/azimuth}"
@@ -19,7 +20,6 @@ function init_azimuth() {
 
   printf "%s" "${_azimuth}"
 }
-
 
 # Main
 source "$(init_azimuth)/main.zsh"

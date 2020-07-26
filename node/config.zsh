@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+-dot-add-fpath "${DOTFILES_DIR}/node/functions"
+
+
 export NVM_DIR="${HOME}/.nvm"
 
 # Nodejs

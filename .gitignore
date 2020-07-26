@@ -1,5 +1,7 @@
 *.bak
 
+*.zwc
+
 /secrets.zsh
 /.cache
 /zsh_custom/plugins

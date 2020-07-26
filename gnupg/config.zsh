@@ -1,5 +1,8 @@
 # GnuPG
 
+-dot-add-fpath "${DOTFILES_DIR}/gnupg/functions"
+
+
 # Default GPG Key
 export DEFAULT_PGP_KEY="0x56CC6498381FD53F"
 export PGP_KEY_ID="0x56CC6498381FD53F"

@@ -1,8 +1,6 @@
 ## Ruby
 export RBENV_ROOT="$HOME/.rbenv"
 
-fpath=("${RBENV_ROOT}/completions" $fpath)
-
 # Chef
 -dot-add-path "/opt/chefdk/bin"
 -dot-add-path "/opt/chefdk/embedded/bin"

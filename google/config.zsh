@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+-dot-add-fpath "${DOTFILES_DIR}/google/functions"
+
+
 # Google Cloud SDK Config
 export GCLOUDSDKPATH="${HOMEBREW_REPOSITORY}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 

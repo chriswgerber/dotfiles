@@ -1,6 +1,6 @@
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
-
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-export PATH=/Users/cgerber/.rbenv/shims:/Users/cgerber/Library/Homebrew/sbin:/Users/cgerber/Library/Homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/opt/chefdk/bin:/opt/chefdk/embedded/bin:/Users/cgerber/.chefdk/gem/ruby/2.3.0/bin:/Users/cgerber/bin:/Users/cgerber/.nodejs/bin:/Users/cgerber/Library/Python/2.7/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/Users/cgerber/Library/Golang/Versions/Current/bin:/Users/cgerber/Projects/go/bin:/Users/cgerber/.rbenv/bin:/Users/cgerber/.nodejs/bin
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="${DOTFILES_DIR}/.cache/sdkman"
+[[ -s "${DOTFILES_DIR}/.cache/sdkman/bin/sdkman-init.sh" ]] && source "${DOTFILES_DIR}/.cache/sdkman/bin/sdkman-init.sh"

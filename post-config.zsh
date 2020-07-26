@@ -1,12 +1,14 @@
 #!/bin/zsh
 
-#zstyle :omz:plugins:keychain agents gpg,ssh
+source "${ZSH}/oh-my-zsh.sh" # Init OMZ
 
--dot-source-dotfile "${ZSH}/oh-my-zsh.sh" # Init OMZ
+source "${DOTFILES_DIR}/theme.zsh"
+
 
 if test -n "${ZSH_DEBUG}"; then # Load ZSH profiling mod
     zmodload zsh/zprof
 fi
+
 
 # Aliases
 # ======================================
@@ -28,3 +30,6 @@ alias ssh-by-file="ssh -F .ssh-config"
 
 # Pretty JSON
 alias prettyjson="python -m json.tool"
+
+# Remove slash from gradlew
+alias gradlew="./gradlew"

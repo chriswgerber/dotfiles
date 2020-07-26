@@ -8,3 +8,8 @@
   printf 'export PYENV_VIRTUALENV_VERSION="%s";\n' \
     $(ls "${HOMEBREW_REPOSITORY}/Cellar/pyenv-virtualenv/")
 ) &> $(-dot-cache-get-file "pyenv-venv-version.sh")
+
+(
+  printf 'export PYENV_BREW_VERSION="%s";\n' \
+    $(pyenv --version | awk '{print $2}')
+) &> $(-dot-cache-get-file "pyenv-version.sh")

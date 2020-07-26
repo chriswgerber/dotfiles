@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+local \
+  username="${1:=${PUSHBULLET_EMAIL}}"
+  api_url=${2:=https://api.pushbullet.com/}
+
+export PUSHBULLET_API_KEY="$(keychain_get_value ${api_url} ${username})"

@@ -22,7 +22,7 @@
 	newHighlight = green bold 22
 	newNormal    = green bold
 [commit]
-    gpgsign  = true
+    gpgsign  = trugst
     template = ~/.dotfiles/git/commit-message.txt
 [core]
     attributesfile = ~/.dotfiles/git/gitattributes
@@ -49,8 +49,10 @@
     smudge   = git-lfs smudge -- %f
 [gui]
     commitmsgwidth = 95
+[hub]
+    host = github.com
 [init]
-    templatedir = ~/.dotfiles/git/init-template/template
+    templatedir = ~/.dotfiles/git/init-template
 [log]
     abbrevCommit = true
     decorate     = full

@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+local \
+  username="${1:=${GITHUB_USER}}" \
+  github_url="${3:=${GITHUB_SCHEME}}${2:=${GITHUB_HOST}}" \
+  github_gist_url="${4:=${GITHUB_GIST_URL}}"
+
+( test -n "${username}" && test -n "${github_url}" ) &&
+  export GITHUB_TOKEN="$(keychain_get_value ${github_url} ${username})"
+
+test -n "${github_gist_url}" &&
+  export GITHUB_GIST_KEY="$(keychain_get_value ${github_gist_url} ${username})"
