@@ -1,7 +1,7 @@
 # Python
 
 -dot-add-fpath "${DOTFILES_DIR}/python/functions"
--dot-add-fpath "${DOTFILES_DIR}/python/completions"
+-dot-add-fpath "${DOTFILES_DIR}/python/completions" "skip"
 
 # Add local functions
 -dot-add-path "${DOTFILES_DIR}/python/libexec"

@@ -1,205 +1,210 @@
 {
-    // Ansible
-    "ansible.validation": false, // Disable until they fix customTags
-    // Autodoc
-    "autoDocstring.docstringFormat": "google",
-    "autoDocstring.includeDescription": true,
-    "autoDocstring.newlineBeforeSummary": true,
-    "autoDocstring.includeName": true,
-    // Breadcrumbs
-    "breadcrumbs.enabled": true,
-    // Docker
-    "docker.languageserver.diagnostics.directiveCasing": "error",
-    "docker.languageserver.diagnostics.instructionCasing": "error",
-    "docker.languageserver.diagnostics.emptyContinuationLine": "error",
-    "docker.languageserver.diagnostics.instructionWorkdirRelative": "error",
-    // Editor
-    "editor.fontFamily": "JetBrains Mono,FiraCode Retina",
-    "editor.fontLigatures": true,
-    "editor.insertSpaces": false,
-    "editor.minimap.enabled": false, // Hide minimap
-    "editor.rulers": [
-      { "column": 80, "color": "#85ff85" },
-      { "column": 100, "color": "#8585ff" },
-      { "column": 120, "color": "#ff8585" }
-    ],
-    // Explorer
-    "explorer.decorations.badges": false,
-    "explorer.openEditors.visible": 0, // Close Open Editors Tab Thing
-    // File Associations
-    "files.associations": {
-        "**/ansible/**/*.yml": "ansible",
-        "*.j2": "jinja-yaml"
+  // Ansible
+  "ansible.validation": false, // Disable until they fix customTags
+  // Autodoc
+  "autoDocstring.docstringFormat": "google",
+  "autoDocstring.includeDescription": true,
+  "autoDocstring.newlineBeforeSummary": true,
+  "autoDocstring.includeName": true,
+  // AWS
+  "aws.telemetry": false,
+  // Breadcrumbs
+  "breadcrumbs.enabled": true,
+  // Docker
+  "docker.languageserver.diagnostics.directiveCasing": "error",
+  "docker.languageserver.diagnostics.instructionCasing": "error",
+  "docker.languageserver.diagnostics.emptyContinuationLine": "error",
+  "docker.languageserver.diagnostics.instructionWorkdirRelative": "error",
+  // Editor
+  "editor.fontFamily": "JetBrains Mono,FiraCode Retina",
+  "editor.fontLigatures": true,
+  "editor.insertSpaces": false,
+  "editor.minimap.enabled": false, // Hide minimap
+  "editor.rulers": [
+    {
+      "column": 80,
+      "color": "#85ff85"
     },
-    "files.exclude": {
-        "**/.git": false,
-        "**/.svn": false,
-        "**/.hg": false,
-        "**/CVS": false
+    {
+      "column": 100,
+      "color": "#8585ff"
     },
-    // Git
-    "git.enabled": false,
-    "gitlab.pipelineGitRemoteName": "origin",
-    "gitlab.showIssueLinkOnStatusBar": false,
-    "gitlab.showPipelineUpdateNotifications": true,
-    "gitlab.remoteName": "origin",
-    // Go
-    "go.formatTool": "goimports",
-    "go.useLanguageServer": true,
-    "go.alternateTools": {
-        "go-langserver": "gopls"
-    },
-    "go.languageServerExperimentalFeatures": {
-        "format": true,
-        "autoComplete": true,
-        "diagnostics": true,
-        "goToDefinition": true,
-        "hover": true,
-        "signatureHelp": true,
-        "goToTypeDefinition": true
-    },
-    "go.buildOnSave": "off",
-    "go.vetOnSave": "off",
-    "[go]": {
-        "editor.snippetSuggestions": "none",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        }
-    },
-    // Launch Configs
-    "launch": {
-        "version": "0.2.0",
-        "configurations": [
-            {
-                "name": "Dlv-gitlab_project",
-                "type": "go",
-                "request": "launch",
-                "mode": "debug",
-                "program": "${workspaceFolder}/gen/gitlab_project.go",
-                "showLog": true
-            }
-        ]
-    },
-    // Markdown
-    "markdownlint.run": "onSave",
-    // Theme
-    "materialTheme.accent": "Acid Lime",
-    // Icons
-    "material-icon-theme.activeIconPack": "react_redux",
-    // "material-icon-theme.folders.color": "#7cb342",
-    "material-icon-theme.hidesExplorerArrows": true,
-    // Python
-    "python.dataScience.enabled": false,
-    "python.dataScience.allowImportFromNotebook": false,
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "${env:PYENV_VIRTUAL_ENV}/bin/black",
-    "python.jediEnabled": false,
-    "python.linting.banditEnabled": true,
-    "python.linting.banditPath": "${env:PYENV_VIRTUAL_ENV}/bin/bandit",
-    "python.linting.enabled": true,
-    "python.linting.pycodestylePath": "${env:PYENV_VIRTUAL_ENV}/bin/pycodestyle",
-    "python.linting.pydocstyleEnabled": true,
-    "python.linting.pydocstylePath": "${env:PYENV_VIRTUAL_ENV}/bin/pydocstyle",
-    "python.linting.pylintPath": "${env:PYENV_VIRTUAL_ENV}/bin/pylint",
-    "python.testing.pytestEnabled": true,
-    "python.venvPath": "${env:HOME}/.pyenv",
-    "python.pythonPath": "${env:PYENV_VIRTUAL_ENV}/bin/python",
-    "python.testing.pytestPath": "${env:PYENV_VIRTUAL_ENV}/bin/pytest",
-    // Terraform
-    "terraform.indexing": {
-        "enabled": false,
-        "liveIndexing": false,
-        "delay": 500,
-        "exclude": [
-            ".terraform/**/*",
-            "**/.terraform/**/*"
-        ]
-    },
-    "terraform.languageServer": {
-        "enabled": true,
-        "args": []
-    },
-    // VSIcons
-    "vsicons.dontShowNewVersionMessage": true,
-    // Window
-    "window.zoomLevel": 0,
-    "workbench.colorCustomizations": {
-        // "foreground": "#636e86",
-        // "statusBar.foreground": "#636e86",
-    },
-    "workbench.fontAliasing": "auto",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.sideBar.location": "left",
-    "workbench.startupEditor": "newUntitledFile",
-    // Yaml
-    "yaml.format.enable": true,
-    "yaml.validate": false,
-    "yaml.customTags": [
-        "!And",
-        "!Base64",
-        "!Cidr",
-        "!Equals",
-        "!FindInMap scalar",
-        "!FindInMap sequence",
-        "!GetAtt",
-        "!GetAZs",
-        "!If",
-        "!ImportValue",
-        "!Join",
-        "!Not",
-        "!Or",
-        "!Ref scalar",
-        "!Select",
-        "!Split",
-        "!Sub scalar",
-        "!Sub sequence",
-        "!And sequence",
-        "!If sequence",
-        "!Not sequence",
-        "!Equals sequence",
-        "!Or sequence",
-        "!FindInMap",
-        "!Join sequence",
-        "!Ref",
-        "!Sub",
-        "!ImportValue sequence",
-        "!Select sequence",
-        "!Split sequence"
-    ],
-    "json.schemas": [
+    {
+      "column": 120,
+      "color": "#ff8585"
+    }
+  ],
+  // Explorer
+  "explorer.decorations.badges": false,
+  "explorer.openEditors.visible": 0, // Close Open Editors Tab Thing
+  // File Associations
+  "files.associations": {
+    "**/ansible/**/*.yml": "ansible",
+    "*.j2": "jinja-yaml"
+  },
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": false,
+    "**/.hg": false,
+    "**/CVS": false
+  },
+  // Git
+  "git.enabled": false,
+  "gitlab.pipelineGitRemoteName": "origin",
+  "gitlab.showIssueLinkOnStatusBar": false,
+  "gitlab.showPipelineUpdateNotifications": true,
+  "gitlab.remoteName": "origin",
+  // Go
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
+  "go.languageServerExperimentalFeatures": {
+    "diagnostics": true,
+    "documentLink": true,
+  },
+  "go.buildOnSave": "off",
+  "go.vetOnSave": "off",
+  "[go]": {
+    "editor.snippetSuggestions": "none",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  // Test/Launch Configs
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
       {
-          "fileMatch": [
-              "cloudformation.json"
-          ],
-          "url": "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"
+        "name": "Dlv-gitlab_project",
+        "type": "go",
+        "request": "launch",
+        "mode": "debug",
+        "program": "${workspaceFolder}/gen/gitlab_project.go",
+        "showLog": true
       }
-    ],
-    "yaml.schemas": {
-        "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "/**/*.cf.yml",
-        "http://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml",
-        "http://json.schemastore.org/ansible-stable-2.5": "/ansible/**.yml"
-    },
-    "markdown.links.openLocation": "beside",
-    "mermaid.arrowMarkerAbsolute": true,
-    "editor.formatOnType": true,
-    "editor.fontSize": 13,
-    "markdown.preview.fontFamily": "Input Sans, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif",
-    "terminal.integrated.fontSize": 13,
-    "terminal.integrated.lineHeight": 1.2,
-    "restructuredtext.preview.fontFamily": "Input Sans, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
-    "mermaid.gantt.fontSize": 12,
-    "workbench.editor.highlightModifiedTabs": true,
-
-    // Experimental Stuff
-    "customizeUI.font.regular": "Input Sans Narrow",
-    "customizeUI.font.monospace": "Input Mono",
-    "customizeUI.fontSizeMap": {
-        "13px": "11px",
-        "12px": "11px",
-        "window-title": "12px", // Window title font when using custom titlebar
-        "tab-title": "12px"     // Used for editor tab titles
-    },
-    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
-    "todo-tree.tree.showScanModeButton": false
+    ]
+  },
+  // Markdown
+  "markdownlint.run": "onSave",
+  // Theme
+  "materialTheme.accent": "Acid Lime",
+  // Icons
+  "material-icon-theme.activeIconPack": "react_redux",
+  // "material-icon-theme.folders.color": "#7cb342",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "${env:PYENV_VIRTUAL_ENV}/bin/black",
+  "python.jediEnabled": false,
+  "python.linting.banditEnabled": true,
+  "python.linting.banditPath": "${env:PYENV_VIRTUAL_ENV}/bin/bandit",
+  "python.linting.enabled": true,
+  "python.linting.pycodestylePath": "${env:PYENV_VIRTUAL_ENV}/bin/pycodestyle",
+  "python.linting.pydocstyleEnabled": true,
+  "python.linting.pydocstylePath": "${env:PYENV_VIRTUAL_ENV}/bin/pydocstyle",
+  "python.linting.pylintPath": "${env:PYENV_VIRTUAL_ENV}/bin/pylint",
+  "python.testing.pytestEnabled": true,
+  "python.venvPath": "${env:HOME}/.pyenv",
+  "python.pythonPath": "${env:PYENV_VIRTUAL_ENV}/bin/python",
+  "python.testing.pytestPath": "${env:PYENV_VIRTUAL_ENV}/bin/pytest",
+  // Terraform
+  "terraform.indexing": {
+    "enabled": false,
+    "liveIndexing": false,
+    "delay": 500,
+    "exclude": [
+      ".terraform/**/*",
+      "**/.terraform/**/*"
+    ]
+  },
+  "terraform.languageServer": {
+    "external": true,
+    "args": [
+      "serve"
+    ]
+  },
+  // VSIcons
+  "vsicons.dontShowNewVersionMessage": true,
+  // Window
+  "window.zoomLevel": 0,
+  "workbench.colorCustomizations": {
+    // "foreground": "#636e86",
+    // "statusBar.foreground": "#636e86",
+  },
+  "workbench.fontAliasing": "auto",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.sideBar.location": "left",
+  "workbench.startupEditor": "newUntitledFile",
+  // Yaml
+  "yaml.format.enable": true,
+  "yaml.validate": false,
+  "yaml.customTags": [
+    "!And",
+    "!Base64",
+    "!Cidr",
+    "!Equals",
+    "!FindInMap scalar",
+    "!FindInMap sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!If",
+    "!ImportValue",
+    "!Join",
+    "!Not",
+    "!Or",
+    "!Ref scalar",
+    "!Select",
+    "!Split",
+    "!Sub scalar",
+    "!Sub sequence",
+    "!And sequence",
+    "!If sequence",
+    "!Not sequence",
+    "!Equals sequence",
+    "!Or sequence",
+    "!FindInMap",
+    "!Join sequence",
+    "!Ref",
+    "!Sub",
+    "!ImportValue sequence",
+    "!Select sequence",
+    "!Split sequence"
+  ],
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "cloudformation.json"
+      ],
+      "url": "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json"
+    }
+  ],
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "/**/*.cf.yml",
+    "http://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml",
+    "http://json.schemastore.org/ansible-stable-2.5": "/ansible/**.yml"
+  },
+  "markdown.links.openLocation": "beside",
+  "mermaid.arrowMarkerAbsolute": true,
+  "editor.formatOnType": true,
+  "editor.fontSize": 13,
+  "markdown.preview.fontFamily": "Input Sans, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.2,
+  "restructuredtext.preview.fontFamily": "Input Sans, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif",
+  "mermaid.gantt.fontSize": 12,
+  "workbench.editor.highlightModifiedTabs": true,
+  // Experimental Stuff
+  "customizeUI.font.regular": "Input Sans Narrow",
+  "customizeUI.font.monospace": "Input Mono",
+  "customizeUI.fontSizeMap": {
+    "13px": "11px",
+    "12px": "11px",
+    "window-title": "12px", // Window title font when using custom titlebar
+    "tab-title": "12px" // Used for editor tab titles
+  },
+  "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+  "todo-tree.tree.showScanModeButton": false,
+  "python.languageServer": "Pylance",
+  "editor.largeFileOptimizations": false,
+  "jupyter.enabled": false,
+  "jupyter.allowImportFromNotebook": false
 }

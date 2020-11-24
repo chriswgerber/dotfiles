@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+local \
+  _src_dir="${PROJECTS}" \
+  _ws_dir="workspaces" \
+  _ws_suffix=".code-workspace" \
+  _ws_path _ws_file _target
+
+_ws_path="${_src_dir}/${_ws_dir}"
+# Strip Path
+_ws_file="${_ws_path}/${1#$_ws_path/}"
+# Strip suffix
+_target="${_ws_file%$_ws_suffix}${_ws_suffix}"
+
+edit "${_target}"
+
+export WORKSPACE="${_target}"
+
+echo "${_target}"

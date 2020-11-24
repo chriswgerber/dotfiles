@@ -1,0 +1,164 @@
+#!/bin/zsh
+# Terminal Theme / Layout
+
+[[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
+
+function prompt_get_fg() {
+  local fg=$1 color
+
+  # Pick from `curl -s https://gist.githubusercontent.com/justinabrahms/1047767/raw/a79218b6ca8c1c04856968d2d202510a4f7ec215/colortest.py | python2`
+  local -A themecolors=(
+    [red]=196
+    [orange]=208
+    [yellow]=220
+    [green]=70
+    [blue]=32
+    [turquoise]=67
+    [purple]=141
+    [white]=255
+    [reset]=255
+  )
+
+  if [[ "${fg}" = "-" ]]; then
+    color="%f"
+  else
+    if [ ${themecolors[${1}]+abc} ]; then
+      color="%F{$themecolors[${1}]}"
+    else
+      color="%F{255}"
+    fi
+  fi
+  echo -n "$color"
+}
+
+function prompt_segment() {
+  local fg=$1 content=$2
+
+  echo -n "%{$(prompt_get_fg ${fg})%}"
+  echo -n $content
+  echo -n "$(prompt_get_fg -)"
+}
+
+
+function dotfiles_preexec() {
+    case "$2" in
+        *git*)
+            PR_GIT_UPDATE=1
+            ;;
+        *hub*)
+            PR_GIT_UPDATE=1
+            ;;
+        *svn*)
+            PR_GIT_UPDATE=1
+            ;;
+    esac
+}
+
+function dotfiles_chpwd() {
+  PR_GIT_UPDATE=1
+}
+
+FMT_STAGED="\u25CF "
+# FMT_STAGED="\u2191 "
+FMT_UNSTAGED="\u25D5 "
+# FMT_UNSTAGED="\u2194 "
+FMT_UNTRACKED="\u25EF "
+# FMT_UNTRACKED="\u2715 "
+
+function dotfiles_precmd() {
+    if [[ -n "$PR_GIT_UPDATE" ]] ; then
+        # check for untracked files or updated submodules, since vcs_info doesn't.
+        FMT_BRANCH="${PROMPT_VCS_SYMBOL}:"
+        FMT_BRANCH+=$(prompt_segment purple '%b') # branch
+        FMT_BRANCH+=$(prompt_segment reset " ")
+        FMT_BRANCH+=$(prompt_segment green '%c')  # staged
+        FMT_BRANCH+=$(prompt_segment orange '%u') # unstaged
+
+        if git ls-files --other --exclude-standard 2> /dev/null | grep -q "."; then
+            PR_GIT_UPDATE=1
+            FMT_BRANCH+=$(prompt_segment red "$FMT_UNTRACKED") # untracked
+        fi
+
+        zstyle ':vcs_info:*:prompt:*' formats "${FMT_BRANCH}"
+
+        vcs_info 'prompt'
+        PR_GIT_UPDATE=
+    fi
+}
+
+function dotfiles_prompt_path() {
+  prompt_segment green "%~ "
+}
+
+function dotfiles_prompt_vcs() {
+  prompt_segment reset "$vcs_info_msg_0_"
+}
+
+function dotfiles_prompt_pyenv() {
+  [ "$(pyenv version-name)" != "system" ] &&
+    prompt_segment blue "pyenv:$(pyenv version-name) "
+}
+
+function dotfiles_prompt_aws() {
+  local _prompt_profile=$AWS_DEFAULT_PROFILE
+
+  (test -n $AWS_PROFILE && _prompt_profile=$AWS_PROFILE) || true
+
+  test -n "$_prompt_profile" &&
+    prompt_segment orange "aws:%U$_prompt_profile%u "
+}
+
+function dotfiles_prompt_gcp() {
+  local _prompt_profile=$(gcpgp)
+
+  test -n "$_prompt_profile" &&
+    prompt_segment blue "gcp:%U$_prompt_profile%u "
+}
+
+function dotfiles_prompt_exitcode() {
+  prompt_segment red "%(?..\ue0b3%?\ue0b1)"
+}
+
+function dotfiles_prompt_date() {
+  prompt_segment turquoise "$(date +'%F %r') "
+}
+
+function dotfiles_prompt_symbol() {
+  [[ $(jobs -l | wc -l) -gt 0 ]] && prompt_segment green "⚙ "
+  prompt_segment reset "%(?.%F{white}.%F{red})${PROMPT_SYMBOL} "
+}
+
+function dotfiles_prompt() {
+  dotfiles_prompt_date
+  dotfiles_prompt_path
+  dotfiles_prompt_vcs
+  dotfiles_prompt_pyenv
+  dotfiles_prompt_aws
+  dotfiles_prompt_gcp
+  dotfiles_prompt_exitcode
+  echo -n "\n"
+  dotfiles_prompt_symbol
+}
+
+FMT_ACTION="($(prompt_segment green '%a'))"
+
+# Zstyle
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format "$(prompt_get_fg yellow)%B--- %d%b"
+
+zstyle ':vcs_info:*' enable git
+
+zstyle ':vcs_info:*:prompt:*' check-for-changes true # disable if working with large repositories
+zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
+zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
+zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
+zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+
+# Hooks
+add-zsh-hook preexec dotfiles_preexec
+add-zsh-hook chpwd dotfiles_chpwd
+add-zsh-hook precmd dotfiles_precmd
+
+PS1='$(dotfiles_prompt)'

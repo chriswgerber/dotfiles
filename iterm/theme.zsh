@@ -1,76 +1,41 @@
+# Terminal Theme / Layout
 #!/bin/zsh
-# Dotfiles theme for Oh My Zsh
-# License: MIT
 
-PROMPT_SYMBOL="❯"
-
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-PR_GIT_UPDATE=1
-
-autoload -U add-zsh-hook
-autoload -Uz vcs_info
-setopt prompt_subst
-
-[[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
+# Pick from `curl -s https://gist.githubusercontent.com/justinabrahms/1047767/raw/a79218b6ca8c1c04856968d2d202510a4f7ec215/colortest.py | python2`
 
 function prompt_get_fg() {
-  local fg=$1
+  local fg=$1 color
+  local -A themecolors=(
+    [red]=196
+    [orange]=208
+    [yellow]=220
+    [green]=70
+    [blue]=32
+    [turquoise]=67
+    [purple]=141
+    [white]=255
+    [reset]=255
+  )
 
-  if [[ "${terminfo[colors]}" -ge 256 ]]; then
-    case "$fg" in
-      red) echo -n "%F{160}" ;;
-      orange) echo -n "%F{208}" ;;
-      yellow) echo -n "%F{10}" ;;
-      green) echo -n "%F{64}" ;;
-      blue) echo -n "%F{26}" ;;
-      turquoise) echo -n "%F{80}" ;;
-      purple) echo -n "%F{140}" ;;
-      *) echo -n "%f" ;;
-    esac
-    return
+  if [[ "${fg}" = "-" ]]; then
+    color="%f"
+  else
+    if [ ${themecolors[${1}]+abc} ]; then
+      color="%F{$themecolors[${1}]}"
+    else
+      color="%F{255}"
+    fi
   fi
-
-  case "$fg" in
-    red) echo -n "%F{hotpink}" ;;
-    orange) echo -n "%F{yellow}" ;;
-    yellow) echo -n "%F{red}" ;;
-    green) echo -n "%F{green}" ;;
-    blue) echo -n "%F{blue}" ;;
-    turquoise) echo -n "%F{cyan}" ;;
-    purple) echo -n "%F{magenta}" ;;
-    *) echo -n "%f" ;;
-  esac
-
-  return
+  echo -n "$color"
 }
 
 function prompt_segment() {
-  local fg=$(prompt_get_fg $1) content=$2
+  local fg=$1 content=$2
 
-  echo -n "%{$fg%}"
+  echo -n "%{$(prompt_get_fg ${fg})%}"
   echo -n $content
   echo -n "$(prompt_get_fg -)"
 }
-
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format "%F{yellow%}%B--- %d%b"
-
-zstyle ':vcs_info:*' enable git
-
-FMT_BRANCH="($(prompt_segment turquoise '%b%u%c'))"
-FMT_ACTION="($(prompt_segment green '%a'))"
-FMT_UNSTAGED=$(prompt_segment orange " ●")
-FMT_STAGED=$(prompt_segment green " ✚")
-zstyle ':vcs_info:*:prompt:*' check-for-changes true # disable if working with large repositories
-zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
-zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
-zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
-zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
-zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
-
 
 function dotfiles_preexec() {
     case "$2" in
@@ -108,18 +73,12 @@ function dotfiles_precmd() {
     fi
 }
 
-
-add-zsh-hook preexec dotfiles_preexec
-add-zsh-hook chpwd dotfiles_chpwd
-add-zsh-hook precmd dotfiles_precmd
-
-
 function dotfiles_prompt_path() {
   prompt_segment green "%~ "
 }
 
 function dotfiles_prompt_vcs() {
-  prompt_segment - "$vcs_info_msg_0_ "
+  prompt_segment reset "$vcs_info_msg_0_ "
 }
 
 function dotfiles_prompt_pyenv() {
@@ -147,12 +106,45 @@ function dotfiles_prompt_exitcode() {
   prompt_segment red "%(?..C:%?)"
 }
 
+function dotfiles_prompt_date() {
+  prompt_segment purple "$(date +'%r %F')"
+  echo -n " "
+}
+
 function dotfiles_prompt_symbol() {
   [[ $(jobs -l | wc -l) -gt 0 ]] && prompt_segment green "⚙ "
   echo -n "%(?.%F{white}.%F{red})${PROMPT_SYMBOL} "
 }
 
+function dotfiles_set_zstyle() {
+  zstyle ':vcs_info:*' enable git
+
+  zstyle ':completion:*' verbose yes
+  zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+  zstyle ':completion:*' group-name ''
+  zstyle ':completion:*:descriptions' format "$(prompt_get_fg blue)%B--- %d%b"
+
+  FMT_BRANCH="($(prompt_segment yellow '%b%u%c'))"
+  FMT_ACTION="($(prompt_segment green '%a'))"
+  FMT_UNSTAGED=$(prompt_segment orange " ●")
+  FMT_STAGED=$(prompt_segment green " ✚")
+
+  zstyle ':vcs_info:*:prompt:*' check-for-changes true # disable if working with large repositories
+  zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
+  zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}"
+  zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
+  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+
+  add-zsh-hook preexec dotfiles_preexec
+  add-zsh-hook chpwd dotfiles_chpwd
+  add-zsh-hook precmd dotfiles_precmd
+}
+
 function dotfiles_prompt() {
+  dotfiles_set_zstyle
+
+  dotfiles_prompt_date
   dotfiles_prompt_path
   dotfiles_prompt_vcs
   dotfiles_prompt_pyenv
@@ -163,5 +155,4 @@ function dotfiles_prompt() {
   dotfiles_prompt_symbol
 }
 
-# Set
-PROMPT='$(dotfiles_prompt)'
+PS1='$(dotfiles_prompt)'

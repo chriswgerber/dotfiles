@@ -11,3 +11,5 @@
 /aws/config
 /aws/creds-vault/vault.log
 
+
+**/completions/*

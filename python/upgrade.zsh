@@ -1,6 +1,9 @@
 #!/bin/zsh
 
--dot-upgrade-completion poetry "${DOTFILES_DIR}/python/completions"
+(
+  printf 'export PYENV_BREW_VERSION="%s";\n' \
+    $(pyenv --version | awk '{print $2}')
+) &> $(-dot-cache-get-file "pyenv-version.sh")
 
 -dot-cache-update-file "pyenv.sh" "pyenv init - zsh"
 
@@ -9,7 +12,4 @@
     $(ls "${HOMEBREW_REPOSITORY}/Cellar/pyenv-virtualenv/")
 ) &> $(-dot-cache-get-file "pyenv-venv-version.sh")
 
-(
-  printf 'export PYENV_BREW_VERSION="%s";\n' \
-    $(pyenv --version | awk '{print $2}')
-) &> $(-dot-cache-get-file "pyenv-version.sh")
+-dot-upgrade-completion poetry "${DOTFILES_DIR}/python/completions"

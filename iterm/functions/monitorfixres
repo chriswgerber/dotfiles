@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+local d32 d27 \
+  common="hz:60 color_depth:8 scaling:on degree:0"
+
+d32="BA715AD6-6264-ADF8-5836-729B20032593"
+d27="F01F6768-BC3E-A626-8393-7C282421D48E"
+
+displayplacer \
+  "id:${d32} ${common} res:3008x1692 origin:(0,0)" \
+  "id:${d27} ${common} res:2560x1440 origin:(3008,252)"

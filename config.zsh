@@ -87,20 +87,28 @@ plugins=(
   osx
   python
   terraform
+  zsh-completions
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  mac-zsh-completions
 )
 
 # Remote plugins
 -dot-install-github-plugin zsh-users/zsh-completions
 -dot-install-github-plugin zsh-users/zsh-autosuggestions
 -dot-install-github-plugin zsh-users/zsh-syntax-highlighting
-
+-dot-install-github-plugin scriptingosx/mac-zsh-completions
 
 # Upgrade Ignore
 # --------------------------------------
 # Directories in cache to ignore during upgrade.
-DOT_UPGRADE_IGNORE=(
+export DOT_UPGRADE_IGNORE=(
+  azimuth
+  Hasklig
   Homebrew
   oh-my-zsh
   zsh_custom
 )
-export DOT_UPGRADE_IGNORE
+
+# Computer information
+DEFAULT_MONITOR_ID="FD273083-6A62-CF50-AFE5-7C7619EAF5E5"

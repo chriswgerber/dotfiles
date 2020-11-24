@@ -1,7 +1,7 @@
 # AWS
 
 -dot-add-fpath "${DOTFILES_DIR}/aws/functions"
--dot-add-fpath "${DOTFILES_DIR}/aws/completions"
+-dot-add-fpath "${DOTFILES_DIR}/aws/completions" "skip"
 
 export AWS_HOME="$HOME/.aws"
 export AWS_DEFAULT_REGION="us-east-1"
