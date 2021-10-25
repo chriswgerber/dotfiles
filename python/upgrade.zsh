@@ -12,4 +12,4 @@
     $(ls "${HOMEBREW_REPOSITORY}/Cellar/pyenv-virtualenv/")
 ) &> $(-dot-cache-get-file "pyenv-venv-version.sh")
 
--dot-upgrade-completion poetry "${DOTFILES_DIR}/python/completions"
+-dot-upgrade-completion poetry completions zsh "${DOTFILES_DIR}/python/completions"

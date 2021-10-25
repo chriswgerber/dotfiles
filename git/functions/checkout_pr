@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+local _branch="${1}"; # Checkout branch
+local _cur_repo="$(git remote get-url origin)";
+local _repo="${2:=${_cur_repo}}";
+local _ref_repo="$(git root)";
+local _tmpdir="${PR_CHECKOUT_DIR:=$(mktemp -d)}/$(basename ${_ref_repo})";
+
+mkdir -p "${_tmpdir}" || true
+
+local _target_dir="${_tmpdir}/$(tr "/" "-" <<< "$_branch")"
+
+(
+  git clone \
+    --reference-if-able "${_ref_repo}" \
+    --single-branch -b "${_branch}" \
+    "${_repo}" \
+    "${_target_dir}"
+)
+
+(edit "${_target_dir}") &
+
+cd "${_target_dir}"
+
+wait
