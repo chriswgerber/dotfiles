@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
--dot-add-symlink-to-home git/gitconfig .gitconfig
--dot-add-symlink-to-home git/gitk .gitk
--dot-add-symlink-to-home git/hub-config.toml $HUB_CONFIG
+-dot-symlink-update git/gitconfig .gitconfig
+-dot-symlink-update git/gitk .gitk
+-dot-symlink-update git/hub-config.toml $HUB_CONFIG
+
+export_github_key

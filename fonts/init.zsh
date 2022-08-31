@@ -2,7 +2,7 @@
 
 # Powerline Fonts
 POWERLINE_FONTS_DIR="$DOT_CACHE_DIR/PowerlineFonts"
--dot-install-github-repo "powerline/fonts" "${POWERLINE_FONTS_DIR}"
+-dot-github-repo-install "powerline/fonts" "${POWERLINE_FONTS_DIR}"
 test -f ${FONTS_DIR}/Hack-Regular.ttf ||
   sh "${POWERLINE_FONTS_DIR}/install.sh";
 

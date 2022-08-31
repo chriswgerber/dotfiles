@@ -1,6 +1,6 @@
 # Charles
 
--dot-add-fpath "${DOTFILES_DIR}/charles/functions"
+-dot-fpath-add "${DOTFILES_DIR}/charles/functions"
 
 # Envs:
 # CHARLES_PORT

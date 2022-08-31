@@ -1,5 +1,5 @@
--dot-add-symlink-to-home java/gradle.properties .gradle/gradle.properties
+-dot-symlink-update java/gradle.properties .gradle/gradle.properties
 
 # Run after config
--dot-cache-source-file "jenv.sh"
--dot-add-symlink-to-home java/gradle.properties .gradle/gradle.properties
+-dot-cache-read-file "jenv.sh"
+-dot-symlink-update java/gradle.properties .gradle/gradle.properties

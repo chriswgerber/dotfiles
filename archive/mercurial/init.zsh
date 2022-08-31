@@ -1,1 +1,1 @@
--dot-add-symlink-to-home mercurial/hgignore_global .hgignore_global
+-dot-symlink-update mercurial/hgignore_global .hgignore_global

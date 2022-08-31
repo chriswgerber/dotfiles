@@ -1,1 +1,1 @@
--dot-add-symlink-to-home travis/config.yml .travis/config.yml
+-dot-symlink-update travis/config.yml .travis/config.yml

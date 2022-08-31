@@ -8,40 +8,133 @@ from shutil import copyfile
 import subprocess
 import sys
 
+from pprint import pprint as pp
 
-VSCODE_EXT_FILE_ENV_VAR='VSCODE_EXT_FILE'
+
+class Printer:
+
+    @staticmethod
+    def echo(msg):
+      sys.stdout.write(msg + "\n")
+
+    @staticmethod
+    def query_yes_no(question, default="yes", force=None):
+        """
+        Ask a yes/no question via raw_input() and return their answer.
+
+        If the user passes an invalid answer, it will continue to ask until killed.
+
+        Args:
+          question (str): The question string to ask the user.
+          default (str): Default answer, yes or no. It is the presumed answer if
+            the user just hits <Enter>. It must be "yes" (the default), "no" or
+            None (meaning an answer is required of the user).
+          force (bool): Overloads the request and returns true or the value.
+
+        Returns:
+          (bool): The "answer" return value is True for "yes" or False for "no".
+        """
+        if force:
+            return force
+
+        choice = None
+        valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
+
+        if default is None:
+            prompt = " [y/n] "
+        elif default.lower() == "yes":
+            prompt = " [Y/n] "
+        elif default.lower() == "no":
+            prompt = " [y/N] "
+        else:
+            raise ValueError("invalid default answer: '%s'" % default)
+
+        while choice not in valid.keys():
+            Printer.echo(question + prompt)
+            choice = input().lower()
+            if default is not None and choice == "":
+                response = valid[default.lower()]
+                break
+            elif choice in valid:
+                response = valid[choice]
+                break
+            else:
+                Printer.echo("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
+
+        return response
+
+    @staticmethod
+    def print_extensions(
+        exts, message='{{ Name: "{e.name}", Version: "{e.version}" }}'
+    ):
+        for ext in exts:
+            logging.debug(message.format(e=ext))
 
 
-def exec_command(cmd):
-    logging.debug('Exec: {}'.format(' '.join(cmd)))
-    try:
-        sub_proc = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+class VSCodeConfig:
 
-        return str(sub_proc, 'utf-8')
-    except subprocess.CalledProcessError as err:
+    query = True
 
-        return "Process failed. {}".format(err)
+    def __init__(self, config_file_env_var="VSCODE_EXT_FILE"):
+        self.config_file_env_var = config_file_env_var
+
+    @property
+    def extension_file(self):
+        config_file = os.environ.get(self.config_file_env_var)
+        logging.debug(
+            "Environ Key: {}, Value: {}".format(self.config_file_env_var, config_file)
+        )
+
+        return os.path.abspath(config_file)
+
+    def update_file(self, code, file_path=None, query=True):
+        if not file_path:
+            file_path = self.extension_file
+
+        if not query or Printer.query_yes_no(
+            "Update configuration file? {}".format(file_path), "Yes"
+        ):
+            copyfile(file_path, "{}.bak".format(file_path))
+            with open(file_path, "w") as fw:
+                Printer.echo("Updating config file {}".format(file_path))
+                [fw.write(str(line) + "\n") for line in code.extensions.list_installed()]
 
 
 class VsCodeExtension:
+    def __init__(self, module=None, **kwargs):
+        self.name = kwargs.get("name")
+        self.version = kwargs.get("version", "")
 
-    def __init__(self, name=None, version='', **kwargs):
-      self.name = kwargs.get('name', name)
-      self.version = kwargs.get('version', version)
+        if module:
+            if isinstance(module, str):
+                self.name, self.version = module.split("@")
+            elif isinstance(module, dict):
+                self.name = module.get("name")
+                self.version = module.get("version", "")
+
+    def __str__(self):
+        return "{}@{}".format(self.name, self.version)
 
 
-class VsCodeExtensionSet(set):
+class VsCodeExtensions(set):
 
-    EXT_CLAZZ=VsCodeExtension
+    extension_class = VsCodeExtension
 
-    def __init__(self, extensions=[], **kwargs):
+    def __init__(self, extensions=None, **kwargs):
         super()
-        self.__sha__ = hashlib.sha256()
-        ext = kwargs.get('extensions', extensions)
-        [self.update_sha(''.join(a)) for a in ext]
-
         self.idx = 0
-        self.__extensions__ = [self.EXT_CLAZZ(*e) for e in ext]
+        self.__sha__ = hashlib.sha256()
+
+        if not extensions:
+            extensions = kwargs.get("extensions", list())
+
+        [self.update_sha("".join(a)) for a in extensions]
+
+        self.__extensions__ = [
+            self.extension_class(name=a, version=b)
+            for e in extensions
+            for a, b in list([e.split("@")])
+        ]
 
     @property
     def sha256(self):
@@ -52,10 +145,9 @@ class VsCodeExtensionSet(set):
         self.__sha__ = value
 
     def update_sha(self, value):
-        self.__sha__.update(value.encode('utf-8'))
+        self.__sha__.update(value.encode("utf-8"))
 
     def __contains__(self, key):
-
         return key in [j.name for j in self.__extensions__]
 
     def __iter__(self):
@@ -73,166 +165,161 @@ class VsCodeExtensionSet(set):
     next = __next__
 
 
-def install_extension(module):
-    """Installs a VS Code Extension using the provided module name.
+class VSCodeExec:
 
-    Optionally, the module can also be a path to a vsix object.
-    """
-    cmd = ['code', '--force', '--install-extension', module]
+    code_cmd = "code"
+    stderr = subprocess.STDOUT
 
-    return exec_command(cmd)
+    def code_exec(self, *cmd):
+        args = [self.code_cmd, *cmd]
 
+        logging.debug("Exec: {}".format(args))
 
-def remove_extension(module):
-    """Installs a VS Code Extension using the provided module name.
+        try:
+            result = subprocess.check_output(args, stderr=subprocess.STDOUT)
 
-    Optionally, the module can also be a path to a vsix object.
-    """
-    cmd = ['code', '--force', '--uninstall-extension', module]
-
-    return exec_command(cmd)
+            return str(result, "utf-8")
+        except subprocess.CalledProcessError as err:
+            return "Process failed. {}".format(err)
 
 
-def list_extensions(**kwargs):
-    """Lists currently installed VSCode extensions, with versions."""
-    cmd = ['code', '--list-extensions']
+class VSCodeExtensionClient(VSCodeExec):
 
-    if kwargs.get('show_versions', True):
-        cmd.append('--show-versions')
+    extensions_class = VsCodeExtensions
 
-    return [a for a in exec_command(cmd).split('\n') if not a == '']
+    def __init__(self):
+        super()
 
+    def list_installed(self, show_versions=True):
+        """
+        Lists currently installed VSCode extensions, with versions.
+        """
+        cmd = ["--list-extensions"]
 
-class VsCodeExtensionManager:
+        if show_versions:
+            cmd.append("--show-versions")
 
-    EXT_CLAZZ=VsCodeExtensionSet
+        raw = self.code_exec(*cmd)
+        extensions = [a for a in raw.split("\n") if not a == ""]
+        result = self.extensions_class(extensions)
 
-    def __init__(self, **kwargs):
-        e = kwargs.get('installed_extensions', [])
-        self.installed_extensions = self.EXT_CLAZZ(e)
+        return result
 
-    def install(self, name, version=None):
-        """Installs a VS Code Extension, using a version if supplied."""
-        ext = name
-        if version:
-            ext = "{}@{}".format(name, version)
+    def install(self, module):
+        """
+        Installs a VS Code Extension using the provided module name.
 
-        return install_extension(ext)
+        Optionally, the module can also be a path to a vsix object.
+        """
+        result = self.code_exec("--force", "--install-extension", str(module))
+        Printer.echo(result)
+        return result
 
-    def remove(self, name):
-        """Installs a VS Code Extension, using a version if supplied."""
+    def remove(self, module):
+        """
+        Installs a VS Code Extension using the provided module name.
 
-        return remove_extension(name)
-
-
-def read_extension_file(file_path, clazz=VsCodeExtensionSet):
-    """Read data from file descriptor as VS Code extension file.
-
-    Passes data from the response as the first argument to the constructor of
-    clazz.
-    """
-    logging.debug("Extension File {}".format(file_path))
-    v = []
-    if os.path.isfile(file_path):
-        with open(file_path) as f:
-            [v.append([b.rstrip() for b in line.split('@')]) for line in f]
-
-    logging.debug(v)
-
-    return clazz(v)
+        Optionally, the module can also be a path to a vsix object.
+        """
+        result = self.code_exec("--force", "--uninstall-extension", str(module))
+        Printer.echo(result)
+        return result
 
 
-def get_extension_file(env_var=VSCODE_EXT_FILE_ENV_VAR):
-    config_file = os.environ.get(VSCODE_EXT_FILE_ENV_VAR)
+class VSCode:
+    def __init__(self):
+        self.extensions = VSCodeExtensionClient()
 
-    logging.debug("Environ {} Value: {}".format(VSCODE_EXT_FILE_ENV_VAR, config_file))
+    def get_extensions(self, file_path):
+        """
+        Read data from file descriptor as VS Code extension file.
 
-    return os.path.abspath(config_file)
+        Passes data from the response as the first argument to the constructor of
+        clazz.
+        """
+        logging.debug("Extension File {}".format(file_path))
+        v = []
+        if os.path.isfile(file_path):
+            with open(file_path) as f:
+                [v.append(line.rstrip()) for line in f]
 
-
-def query_yes_no(question, default="yes", force=None):
-    """Ask a yes/no question via raw_input() and return their answer.
-
-    If the user passes an invalid answer, it will continue to ask until killed.
-
-    Args:
-        question (str): The question string to ask the user.
-        default (str): Default answer, yes or no. It is the presumed answer if
-            the user just hits <Enter>. It must be "yes" (the default), "no" or
-            None (meaning an answer is required of the user).
-        force (bool): Overloads the request and returns true or the value.
-
-    Returns:
-        (bool): The "answer" return value is True for "yes" or False for "no".
-    """
-    if force:
-        return force
-
-    choice = None
-    valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
-
-    if default is None:
-        prompt = " [y/n] "
-    elif default.lower() == "yes":
-        prompt = " [Y/n] "
-    elif default.lower() == "no":
-        prompt = " [y/N] "
-    else:
-        raise ValueError("invalid default answer: '%s'" % default)
-
-    while choice not in valid.keys():
-        sys.stdout.write(question + prompt)
-        choice = input().lower()
-        if default is not None and choice == '':
-            response = valid[default.lower()]
-            break
-        elif choice in valid:
-            response = valid[choice]
-            break
-        else:
-            sys.stdout.write(
-                "Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
-
-    return response
+        return self.extensions.extensions_class(v)
 
 
 def main():
-    changes = False
+    config = VSCodeConfig()
 
-    logging.basicConfig(level=logging.INFO, format='%(levelname)s\t%(message)s')
+    logging.basicConfig(level=logging.WARNING, format="%(levelname)s\t%(message)s")
 
-    manager = VsCodeExtensionManager(
-        installed_extensions=[e.split('@') for e in list_extensions()],
-    )
+    code = VSCode()
+
     logging.debug("Extensions (Currently Installed):")
-    for ext in manager.installed_extensions:
-        logging.debug('{{ Name: "{e.name}", Version: "{e.version}" }}'.format(e=ext))
+    installed_extensions = code.extensions.list_installed()
+    Printer.print_extensions(installed_extensions)
 
-    sync_extensions = read_extension_file(get_extension_file())
     logging.debug("Extensions (From File):")
-    for rext in sync_extensions:
-        logging.debug('{{ Name: "{e.name}", Version: "{e.version}" }}'.format(e=rext))
-
-    for k in manager.installed_extensions:
-        if k.name not in sync_extensions:
-            changes = True
-            if query_yes_no("Uninstall {l.name}?".format(l=k), "No"):
-                logging.warning("Removing extension {ext.name} @ {ext.version}".format(ext=k))
-                manager.remove(k.name)
-
-    for j in sync_extensions:
-        if j.name not in manager.installed_extensions:
-            if query_yes_no("Install {ext.name} @ {ext.version}?".format(ext=j), "Yes"):
-                changes = True
-                logging.warning("Installing extension {ext.name} @ {ext.version}".format(ext=j))
-                manager.install(j.name, j.version)
-
-    if changes and query_yes_no("Update configuration file? {}".format(get_extension_file()), "Yes"):
-        copyfile(get_extension_file(), "{}.bak".format(get_extension_file()))
-        with open(get_extension_file(), "w") as fw:
-            logging.info(list_extensions())
-            [fw.write(line + '\n') for line in list_extensions()]
+    config_extensions = code.get_extensions(config.extension_file)
+    Printer.print_extensions(config_extensions)
 
 
-if __name__ == '__main__':
+    # ------
+    Printer.echo(
+        "Installing missing extensions from config file {}".format(
+            config.extension_file
+        )
+    )
+    installed_names = set([a.name for a in installed_extensions])
+    config_ext_names = set([a.name for a in config_extensions])
+    missing_config_exts = list(config_ext_names - installed_names)
+    missing = [a for a in config_extensions if a.name in missing_config_exts]
+
+    to_install = []
+    if missing:
+        Printer.echo("Missing extensions: {}".format([str(a) for a in missing]))
+        Printer.echo("Install missing extensions: ")
+    for r in missing:
+        if not config.query:
+            to_install.append(r)
+        elif Printer.query_yes_no(
+            "{ext.name} @ {ext.version}?".format(ext=r), "Yes"
+        ):
+            to_install.append(r)
+
+    if to_install:
+        logging.warning("Installing extensions [{}]".format([str(a) for a in to_install]))
+        for r in to_install:
+            code.extensions.install(r)
+
+
+    # ------
+    Printer.echo(
+        "Removing missing extensions from config file {}".format(config.extension_file)
+    )
+    difference = list(installed_names - config_ext_names)
+    extra = [a for a in installed_extensions if a.name in difference]
+    logging.warning("Extra extensions: {}".format([str(a) for a in extra]))
+
+    to_remove = []
+    if extra:
+        Printer.echo("Extra extensions: {}".format([str(a) for a in extra]))
+        Printer.echo("Uninstall extra extensions: ")
+    for r in extra:
+        if not config.query:
+            to_remove.append(r)
+        elif Printer.query_yes_no(
+            "{ext.name} @ {ext.version}?".format(ext=r), "Yes"
+        ):
+            to_remove.append(r)
+
+    if to_remove:
+        logging.warning("Removing extensions {}".format([str(a) for a in to_remove]))
+        for r in [a.name for a in to_remove]:
+            code.extensions.remove(r)
+
+
+    # ------
+    config.update_file(code)
+
+
+if __name__ == "__main__":
     main()

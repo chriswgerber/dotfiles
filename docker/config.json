@@ -1,11 +1,8 @@
 {
-	"auths": {
-	},
-	"HttpHeaders": {
-		"User-Agent": "Docker-Client/18.09.2 (darwin)"
-	},
+	"auths": {},
 	"credsStore": "osxkeychain",
 	"credHelpers": {
 		"registry.gitlab.com": "osxkeychain"
-	}
+	},
+	"currentContext": "colima"
 }

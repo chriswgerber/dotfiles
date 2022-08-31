@@ -2,9 +2,9 @@
 export RBENV_ROOT="$HOME/.rbenv"
 
 # Chef
--dot-add-path "/opt/chefdk/bin"
--dot-add-path "/opt/chefdk/embedded/bin"
--dot-add-path "$HOME/.chefdk/gem/ruby/2.3.0/bin"
+-dot-path-add "/opt/chefdk/bin"
+-dot-path-add "/opt/chefdk/embedded/bin"
+-dot-path-add "$HOME/.chefdk/gem/ruby/2.3.0/bin"
 
 # Aliases
 alias rake="noglob rake"

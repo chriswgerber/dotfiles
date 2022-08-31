@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+java -jar "${PLANTUML_JAR}"

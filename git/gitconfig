@@ -7,66 +7,93 @@
     lg            = "log --show-signature --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     pull-dirs     = "!(ls | xargs -P4 -I{} git -C {} pull --all --ff-only)"
     tinylog       = "!git --no-pager log --oneline --graph --decorate"
+
 [color]
-	ui = true
+    ui = true
+
 [color "diff"]
-	commit     = yellow bold
-	frag       = magenta bold
-	meta       = yellow
-	new        = green bold
-	old        = red bold
-	whitespace = red reverse
+    commit     = yellow bold
+    frag       = magenta bold
+    meta       = yellow
+    new        = green bold
+    old        = red bold
+    whitespace = red reverse
+
 [color "diff-highlight"]
-	oldHighlight = red bold 52
-	oldNormal    = red bold
-	newHighlight = green bold 22
-	newNormal    = green bold
+    oldHighlight = red bold 52
+    oldNormal    = red bold
+    newHighlight = green bold 22
+    newNormal    = green bold
+
 [commit]
-    gpgsign  = true
+    gpgsign  = false
     template = ~/.dotfiles/git/commit-message.txt
+
 [core]
     attributesfile = ~/.dotfiles/git/gitattributes
     commitGraph    = true
     editor         = vim
     excludesfile   = ~/.dotfiles/git/gitignore_global
-	pager          = diff-so-fancy | less --tabs=4 -RFX
+    pager          = diff-so-fancy | less --tabs=4 -RFX
+
 [diff]
     renames = true
     tool    = bcomp
+
 [difftool]
     prompt = false
+
 [difftool "bcomp"]
-    cmd           = \"$HOMEBREW_REPOSITORY/bin/bcomp\" \"$LOCAL\" \"$REMOTE\"
+    cmd           = \"$HOMEBREW_PREFIX/bin/bcomp\" \"$LOCAL\" \"$REMOTE\"
     trustExitCode = true
+
 [diff "tgz"]
     binary   = true
     textconv = tar --to-stdout -tvf
+
 [feature]
     manyFiles = true
+
 [filter "lfs"]
     clean    = git-lfs clean -- %f
     required = true
     smudge   = git-lfs smudge -- %f
+	process  = git-lfs filter-process
+
 [gui]
     commitmsgwidth = 95
+
 [hub]
     host = github.com
+
 [init]
     templatedir = ~/.dotfiles/git/init-template
+	defaultBranch = main
+
 [log]
     abbrevCommit = true
     decorate     = full
+
 [merge]
     tool = bcomp
+
 [mergetool]
     prompt = false
+
 [mergetool "bcomp"]
-    cmd           = \"$HOMEBREW_REPOSITORY/bin/bcomp\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+    cmd           = \"$HOMEBREW_PREFIX/bin/bcomp\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
     trustExitCode = true
+
 [push]
     default = simple
+
 [protocol]
     version = 2
+
+[tag]
+    gpgSign = true
+
 [user]
     email = chriswgerber@gmail.com
     name  = Chris W. Gerber
+    signingkey = "0x00E2317507FAB006"

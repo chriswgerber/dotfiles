@@ -1,3 +1,18 @@
+Host gateway
+    HostName     192.168.1.1
+
+Host pihole
+    HostName 192.168.1.164
+    User pi
+
+Host controller
+    HostName 192.168.1.122
+    User root
+    PreferredAuthentications publickey,password
+
+Host 192.168.*
+    PreferredAuthentications publickey
+
 Host bitbucket.org
     ControlMaster no
 
@@ -13,5 +28,6 @@ Host *
     ForwardAgent        yes
     ServerAliveInterval 100
     AddKeysToAgent      yes
-    # IdentitiesOnly      yes
+    IdentitiesOnly      yes
+    IdentityFile        ~/.ssh/id_rsa.pub
     PreferredAuthentications publickey

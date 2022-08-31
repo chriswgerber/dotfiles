@@ -1,4 +1,4 @@
--dot-add-symlink-to-home editor/editorconfig .editorconfig
--dot-add-symlink-to-home editor/vimrc .vimrc
+-dot-symlink-update editor/editorconfig .editorconfig
+-dot-symlink-update editor/vimrc .vimrc
 
--dot-cache-source-file "vim.sh"
+-dot-cache-read-file "vim.sh"

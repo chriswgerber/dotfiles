@@ -1,3 +1,3 @@
--dot-add-symlink-to-home ruby/gemrc .gemrc
+-dot-symlink-update ruby/gemrc .gemrc
 
--dot-cache-source-file "rbenv.sh"
+-dot-cache-read-file "rbenv.sh"

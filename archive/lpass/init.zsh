@@ -1,2 +1,2 @@
--dot-add-symlink-to-home lpass/env .lpass/env
--dot-add-symlink-to-home lpass/username .lpass/username
+-dot-symlink-update lpass/env .lpass/env
+-dot-symlink-update lpass/username .lpass/username

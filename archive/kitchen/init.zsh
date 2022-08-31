@@ -1,2 +1,2 @@
 # Folders
--dot-add-symlink-to-home kitchen/kitchen.yml .kitchen/kitchen.yml
+-dot-symlink-update kitchen/kitchen.yml .kitchen/kitchen.yml

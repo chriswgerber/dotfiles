@@ -1,3 +1,3 @@
 # Install Homebrew
 
--dot-install-github-repo "Homebrew/brew" "${HOMEBREW_REPOSITORY}"
+-dot-github-repo-install "Homebrew/brew" "${HOMEBREW_REPOSITORY}"

@@ -7,10 +7,11 @@ export GIT_PROTOCOL="https"
 
 export LANG=en_US.UTF-8 # Default Language
 unsetopt autocd         # Disable AutoCD
+setopt HIST_IGNORE_SPACE # ignore commands with a space at the beginning
 
 # ZSH
 # ======================================
-export DOT_CACHE_DIR="${DOTFILES_DIR}/.cache"
+export DOT_CACHE_DIR="${DOT_CACHE_DIR:=${DOTFILES_DIR}/.cache}"
 export ZSH="${DOT_CACHE_DIR}/oh-my-zsh"
 export ZSH_CACHE_DIR="${DOT_CACHE_DIR}"
 export ZSH_CUSTOM="${ZSH_CACHE_DIR}/zsh_custom"
@@ -48,12 +49,12 @@ esac
 # Load system and user paths
 # ======================================
 export PATH="/bin"
--dot-add-path "/sbin"
--dot-add-path "/usr/bin"
--dot-add-path "/usr/sbin"
--dot-add-path "/usr/local/bin"
--dot-add-path "/usr/local/sbin"
--dot-add-path "$HOME/bin"
+-dot-path-add "/sbin"
+-dot-path-add "/usr/bin"
+-dot-path-add "/usr/sbin"
+-dot-path-add "/usr/local/bin"
+-dot-path-add "/usr/local/sbin"
+-dot-path-add "$HOME/bin"
 # Load Manpaths
 export MANPATH="/usr/local/man:$MANPATH"
 export MANPATH="$HOME/share/man:$MANPATH"
@@ -61,7 +62,7 @@ export MANPATH="$HOME/share/man:$MANPATH"
 
 # Install OMZ
 # ======================================
--dot-install-omz
+-dot-omz-install
 
 
 # Themes
@@ -84,7 +85,7 @@ plugins=(
   gradle
   iterm2
   keychain
-  osx
+  macos
   python
   terraform
   zsh-completions
@@ -94,10 +95,10 @@ plugins=(
 )
 
 # Remote plugins
--dot-install-github-plugin zsh-users/zsh-completions
--dot-install-github-plugin zsh-users/zsh-autosuggestions
--dot-install-github-plugin zsh-users/zsh-syntax-highlighting
--dot-install-github-plugin scriptingosx/mac-zsh-completions
+-dot-github-plugin-add zsh-users/zsh-completions
+-dot-github-plugin-add zsh-users/zsh-autosuggestions
+-dot-github-plugin-add zsh-users/zsh-syntax-highlighting
+-dot-github-plugin-add scriptingosx/mac-zsh-completions
 
 # Upgrade Ignore
 # --------------------------------------

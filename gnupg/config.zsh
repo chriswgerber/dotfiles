@@ -1,6 +1,6 @@
 # GnuPG
 
--dot-add-fpath "${DOTFILES_DIR}/gnupg/functions"
+-dot-fpath-add "${DOTFILES_DIR}/gnupg/functions"
 
 
 # Default GPG Key

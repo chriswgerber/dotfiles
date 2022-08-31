@@ -1,1 +1,1 @@
--dot-add-symlink-to-home docker/config.json .docker/config.json
+-dot-symlink-update docker/config.json .docker/config.json

@@ -2,17 +2,17 @@
 
 test -d $PYENV_VIRTUALENV_CACHE_PATH || mkdir -p $PYENV_VIRTUALENV_CACHE_PATH
 
--dot-add-symlink-to-home python/pip.conf .config/pip/pip.conf
--dot-add-symlink-to-home python/pydistutils.cfg .pydistutils.cfg
+-dot-symlink-update python/pip.conf .config/pip/pip.conf
+-dot-symlink-update python/pydistutils.cfg .pydistutils.cfg
 
--dot-cache-source-file "pyenv-version.sh"
+-dot-cache-read-file "pyenv-version.sh"
 
--dot-source-dotfile "pyenv.zsh" "${HOMEBREW_CELLAR}/pyenv/${PYENV_BREW_VERSION}/completions"
+-dot-file-source "pyenv.zsh" "${HOMEBREW_CELLAR}/pyenv/${PYENV_BREW_VERSION}/completions"
 
--dot-cache-source-file "pyenv-venv-version.sh"
--dot-cache-source-file "pyenv.sh"
+-dot-cache-read-file "pyenv-venv-version.sh"
+-dot-cache-read-file "pyenv.sh"
 
--dot-add-path "${HOMEBREW_REPOSITORY}/Cellar/pyenv-virtualenv/${PYENV_VIRTUALENV_VERSION}/shims"
+-dot-path-add "${HOMEBREW_CELLAR}/pyenv-virtualenv/${PYENV_VIRTUALENV_VERSION}/shims"
 
 typeset -g -a precmd_functions
 

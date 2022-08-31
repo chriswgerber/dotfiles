@@ -1,3 +1,3 @@
 #!/bin/zsh
 
--dot-add-symlink-to-home google/boto.ini "${HOME}/.boto"
+-dot-symlink-update google/boto.ini "${HOME}/.boto"

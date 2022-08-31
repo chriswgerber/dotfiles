@@ -1,3 +1,3 @@
 # Curlrc
 
--dot-add-symlink-to-home curl/curlrc .curlrc
+-dot-symlink-update curl/curlrc .curlrc

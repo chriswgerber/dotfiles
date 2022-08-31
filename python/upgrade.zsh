@@ -9,7 +9,7 @@
 
 (
   printf 'export PYENV_VIRTUALENV_VERSION="%s";\n' \
-    $(ls "${HOMEBREW_REPOSITORY}/Cellar/pyenv-virtualenv/")
+    $(ls "${HOMEBREW_CELLAR}/pyenv-virtualenv/")
 ) &> $(-dot-cache-get-file "pyenv-venv-version.sh")
 
--dot-upgrade-completion poetry completions zsh "${DOTFILES_DIR}/python/completions"
+( -dot-upgrade-completion poetry completions zsh "${DOTFILES_DIR}/python/completions" ) &

@@ -1,3 +1,3 @@
 
 
--dot-add-fpath "${DOTFILES_DIR}/ssh/functions"
+-dot-fpath-add "${DOTFILES_DIR}/ssh/functions"

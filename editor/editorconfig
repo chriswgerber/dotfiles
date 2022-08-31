@@ -1,6 +1,21 @@
 ; Global Editorconfig
 root = true
 
+; Defaults
+[*]
+charset                  = utf-8
+end_of_line              = lf
+indent_size              = 2
+indent_style             = space
+insert_final_newline     = true
+max_line_length          = 200
+trim_trailing_whitespace = true
+
+# PlantUML
+
+[*.puml]
+indent_size = 4
+
 # Golang
 
 [*.go]
@@ -39,19 +54,7 @@ indent_style = tab
 indent_size = 4
 indent_style = tab
 
-
 # Other languages
 
 [*.{php,py,scss,cf.yml,cf.yaml}]
 indent_size = 4
-
-
-; Defaults
-[*]
-charset                  = utf-8
-end_of_line              = lf
-indent_size              = 2
-indent_style             = space
-insert_final_newline     = true
-max_line_length          = 200
-trim_trailing_whitespace = true
