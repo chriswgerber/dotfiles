@@ -6,4 +6,4 @@
       "$(dirname $_go_prefix)" \
       "$(readlink $_go_prefix)"
   echo '-dot-path-add "$GOROOT/bin";'
-) &> $(-dot-cache-get-file "go-env.sh")
+) &> $(-dot-cache-create-file "go-env.sh")

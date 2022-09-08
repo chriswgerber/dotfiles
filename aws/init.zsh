@@ -9,7 +9,10 @@ source "${HOMEBREW_PREFIX}/opt/awscli/libexec/bin/aws_zsh_completer.sh"
 
 # CLI Aliases
 -dot-github-repo-install "awslabs/awscli-aliases" "${AWS_CLI_ALIASES}"
-test -L $AWS_HOME/cli/alias || ln -s $AWS_CLI_ALIASES/alias $AWS_HOME/cli/alias
+test -L $AWS_HOME/cli/alias || ( \
+  mkdir -p $AWS_HOME/cli;
+  ln -s $AWS_CLI_ALIASES/alias $AWS_HOME/cli/alias;
+)
 
 # Decrypt AWS Config
 function _decrypted_aws() {
