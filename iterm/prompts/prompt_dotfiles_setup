@@ -99,6 +99,11 @@ function dotfiles_prompt_pyenv() {
     prompt_segment blue "pyenv:$(pyenv version-name) "
 }
 
+function dotfiles_prompt_node() {
+  [ "$(command -v nvm)" != "" ] &&
+    prompt_segment blue "nvm:$(nvm version) "
+}
+
 function dotfiles_prompt_aws() {
   local _prompt_profile=$AWS_DEFAULT_PROFILE
 
@@ -133,6 +138,7 @@ function dotfiles_prompt() {
   dotfiles_prompt_path
   dotfiles_prompt_vcs
   dotfiles_prompt_pyenv
+  dotfiles_prompt_node
   dotfiles_prompt_aws
   dotfiles_prompt_gcp
   dotfiles_prompt_exitcode

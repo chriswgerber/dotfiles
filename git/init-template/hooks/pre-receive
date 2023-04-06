@@ -1,27 +1,32 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script should be saved in a git repo as a hook file, e.g. .git/hooks/pre-receive.
 # It looks for scripts in the .git/hooks/pre-receive.d directory and executes them in order,
 # passing along stdin. If any script exits with a non-zero status, this script exits.
 
-script_dir=$(dirname $0)
-hook_name=$(basename $0)
 
-hook_dir="$script_dir/$hook_name.d"
+run_hooks_d() {
+  local script_dir=$1
+  local hook_name=$2
 
-if test -d "$hook_dir"; then
-  stdin=$(cat /dev/stdin)
+  hook_dir="$script_dir/$hook_name.d"
 
-  for hook in "$hook_dir/"*; do
-    echo "Running $hook_name/$hook hook"
-    echo "$stdin" | $hook "$@"
+  if test -d "$hook_dir"; then
+    stdin=$(cat /dev/stdin)
 
-    exit_code=$?
+    for hook in "$hook_dir/"*; do
+      echo "Running $hook_name/$hook hook"
+      echo "$stdin" | $hook "$@"
 
-    if test $exit_code -neq 0; then
-      exit $exit_code
-    fi
-  done
-fi
+      exit_code=$?
 
-exit 0
+      if test $exit_code -neq 0; then
+        exit $exit_code
+      fi
+    done
+  fi
+
+  exit 0
+}
+
+run_hooks_d "$(dirname "$0")" "$(basename "$0")"

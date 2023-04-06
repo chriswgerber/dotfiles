@@ -5,9 +5,11 @@ export ZSH_DEBUG=1
 export MAIN_ZSH="${DOTFILES_DIR}/main.zsh"
 export GIT_PROTOCOL="https"
 
-export LANG=en_US.UTF-8 # Default Language
-unsetopt autocd         # Disable AutoCD
+
+export LANG=en_US.UTF-8  # Default Language
+unsetopt autocd          # Disable AutoCD
 setopt HIST_IGNORE_SPACE # ignore commands with a space at the beginning
+
 
 # ZSH
 # ======================================
@@ -24,7 +26,15 @@ export DISABLE_AUTO_UPDATE=true
 # Configs
 # ======================================
 
+export BUNDLE_ID="com.chriswgerber.dotfiles"
+
+# Data files
+export XDG_DATA_HOME="${HOME}/Documents"
+# Non-essential cache
+export XDG_CACHE_HOME="${HOME}/Library/Caches"
+# Configs
 export XDG_CONFIG_HOME="${HOME}/.config"
+
 
 if [ -d $HOME/projects ]; then
     export PROJECTS="${HOME}/Projects"
@@ -111,5 +121,4 @@ export DOT_UPGRADE_IGNORE=(
   zsh_custom
 )
 
-# Computer information
-DEFAULT_MONITOR_ID="FD273083-6A62-CF50-AFE5-7C7619EAF5E5"
+export ZSH_DISABLE_COMPFIX="true"

@@ -1,17 +1,27 @@
-#!/bin/sh
+#!/bin/bash
 
-PC_YAML=.pre-commit-config.yaml
-PC_DEFAULT_YAML=.git/files/pre-commit-config.yaml
+run_hooks_d() {
+  local script_dir=$1
+  local hook_name=$2
 
-#if [[ ! -f ${PC_YAML} ]]; then
-#    echo "Creating pre-commit config file, because one doesn't exist.";
-#    cp ${PC_DEFAULT_YAML} ${PC_YAML};
-#    echo "Adding ${PC_YAML} to repository.";
-#    git add ${PC_YAML}
-#fi
+  hook_dir="$script_dir/$hook_name.d"
 
-# $(git config --path --get init.templatedir)/../scripts/install-pre-commit.sh
+  if test -d "$hook_dir"; then
+    stdin=$(cat /dev/stdin)
 
-if [[ -f ${PC_YAML} ]]; then
-    pre-commit
-fi
+    for hook in "$hook_dir/"*; do
+      echo "Running $hook_name/$hook hook"
+      echo "$stdin" | $hook "$@"
+
+      exit_code=$?
+
+      if test $exit_code -neq 0; then
+        exit $exit_code
+      fi
+    done
+  fi
+
+  exit 0
+}
+
+run_hooks_d "$(dirname "$0")" "$(basename "$0")"

@@ -1,0 +1,73 @@
+#!/bin/zsh
+
+##
+# Start/edit a new ticket
+#
+# $ ticket NUM [DIR] [NEW]
+#
+# Args:
+#   NUM - Ticket Number
+#   DIR - Source Code Dir
+#         XDG_DATA_DIR/Tickets/TICKET_NUM/REPO_NAME
+#   NEW - Open new tab
+##
+
+# Args
+#
+# Ticket Number
+local ticket_num="${1}";
+# Source Dir (Optional, if in repo dir)
+local ref_repo="${2:=$(git root)}";
+#
+local new_tab="${3:=""}";
+
+local work_dir="${XDG_DATA_HOME}/Tickets/${ticket_num}"
+
+# Make / CD Ticket Dir
+mkdir -p "${work_dir}" || true;
+
+if test -z "${new_tab}"; then
+  (
+    cd "${work_dir}" || return;
+    new_tab ticket "${ticket_num}" "${ref_repo}" "new";
+  )
+else
+  (
+    local repo_origin="$(git -C "${ref_repo}" remote get-url origin)";
+    local repo_dir="${work_dir}/$(basename ${ref_repo})";
+
+    # If exists, cd, pull and open
+    if test -d "${repo_dir}"; then
+      (
+        printf '> git -C "%s" pull --all\n' \
+          "${repo_dir}";
+
+        git -C "${repo_dir}" pull \
+          --all;
+      ) &
+
+    # If not exists, clone and create.
+    else
+      (
+        printf '> git clone --progress --reference-if-able "%s" "%s" "%s";\n' \
+          "${ref_repo}" \
+          "${repo_origin}" \
+          "${repo_dir}";
+
+        git clone \
+          --progress \
+          --reference-if-able "${ref_repo}" \
+          "${repo_origin}" \
+          "${repo_dir}";
+      ) &
+    fi
+
+    (
+      printf '> edit "%s"\n' "${work_dir}";
+
+      edit "${work_dir}"
+    ) &
+
+    wait;
+  )
+fi

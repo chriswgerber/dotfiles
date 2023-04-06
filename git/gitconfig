@@ -4,9 +4,11 @@
     fetch-masters = "!(ls | xargs -P4 -I{} git -C {} fetch origin master)"
     fetch-dirs    = "!(ls | xargs -P4 -I{} git -C {} fetch --all -p)"
     hub           = "!hub"
-    lg            = "log --show-signature --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    lg            = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     pull-dirs     = "!(ls | xargs -P4 -I{} git -C {} pull --all --ff-only)"
-    tinylog       = "!git --no-pager log --oneline --graph --decorate"
+    tinylog       = "!git log --oneline --graph --decorate"
+    root          = "!git exec pwd"
+    checkout-pr   = "!checkout_pr "
 
 [color]
     ui = true
@@ -91,9 +93,9 @@
     version = 2
 
 [tag]
-    gpgSign = true
+    gpgSign = false
 
 [user]
-    email = chriswgerber@gmail.com
-    name  = Chris W. Gerber
+    email      = chriswgerber@gmail.com
+    name       = Chris W. Gerber
     signingkey = "0x00E2317507FAB006"
