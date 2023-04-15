@@ -168,7 +168,7 @@
     "*.ipynb": "jupyter-notebook"
   },
   "workbench.fontAliasing": "auto",
-  "workbench.iconTheme": "vscode-icons",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
   "yaml.customTags": [
@@ -211,5 +211,8 @@
     "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "/**/*.cf.yml"
   },
   "yaml.schemaStore.enable": true,
-  "yaml.validate": true
+  "yaml.validate": true,
+  "[python]": {
+    "editor.formatOnType": true
+  }
 }
