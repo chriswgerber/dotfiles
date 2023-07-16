@@ -1,20 +1,34 @@
--- Look for Spoons in ~/.dotfiles/hammerspoon/Spoons
+hs.printf("hs.configdir = %s", hs.configdir)
 
--- Hardcode because envs
-dot_spoons_dir = os.getenv("HOME") .. "/.dotfiles/hammerspoon/Spoons/?.spoon/init.lua"
-
--- Add path
+dot_spoons_dir = hs.configdir .. "/Spoons"
 hs.printf("Extra spoons dir %s", dot_spoons_dir)
-package.path = package.path .. ";" .. dot_spoons_dir
 
+-- Add dots dirs to path
+package.path = dot_spoons_dir .. "/?.spoon/init.lua;" .. package.path
+package.path = dot_spoons_dir .. "/?.lua;" .. package.path
+
+-- ===========
 -- Load spoons
+-- ===========
+
+
+-- Caffeinate plugin
 hs.loadSpoon("CaffeineBar")
 spoon.CaffeineBar:start()
 
+
+-- Notify plugin
 hs.loadSpoon("Notify")
-spoon.Notify.hostname = "Improving-mbp"
+spoon.Notify.hostname = "ChrisWGerber-mbp"
 spoon.Notify:start()
 
+
+-- Streamdeck plugin
+-- hs.loadSpoon("StreamDeck")
+-- spoon.StreamDeck:start()
+
+
+-- PushToTalk plugin
 -- hs.loadSpoon("PushToTalk")
 -- spoon.PushToTalk.app_switcher = { ['Slack'] = 'push-to-talk' }
 -- spoon.PushToTalk:start()
