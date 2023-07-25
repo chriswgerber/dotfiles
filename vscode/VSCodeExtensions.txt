@@ -6,6 +6,7 @@ bpruitt-goddard.mermaid-markdown-syntax-highlighting@1.5.2
 bungcip.better-toml@0.3.2
 casualjim.gotemplate@0.4.0
 chrmarti.ssh@0.0.4
+compilouit.manpage@0.0.2
 DavidAnson.vscode-markdownlint@0.51.0
 EditorConfig.EditorConfig@0.16.4
 EFanZh.graphviz-preview@1.6.2

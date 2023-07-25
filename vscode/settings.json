@@ -55,7 +55,7 @@
     }
   ],
   "explorer.decorations.badges": false,
-  "explorer.openEditors.visible": 0,
+  "explorer.openEditors.visible": 5,
   "files.associations": {
     "*.j2": "jinja-yaml",
     "**/ansible/**/*.yml": "ansible"
@@ -205,7 +205,8 @@
   ],
   "yaml.format.enable": true,
   "yaml.schemas": {
-    "http://json.schemastore.org/ansible-stable-2.5": "/ansible/**.yml",
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/inventory.json": "inventory/**.yml",
+    "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json": "ansible/**.yml",
     "http://json.schemastore.org/gitlab-ci": "/.gitlab-ci.yml",
     "https://dev.azure.com/healthcarecloud/_apis/distributedtask/yamlschema": "/azure-pipelines.yml",
     "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "/**/*.cf.yml"
