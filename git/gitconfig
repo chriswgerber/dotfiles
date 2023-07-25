@@ -96,6 +96,6 @@
     gpgSign = false
 
 [user]
-    email      = chriswgerber@gmail.com
+	email      = 5061057+chriswgerber@users.noreply.github.com
     name       = Chris W. Gerber
     signingkey = "0x00E2317507FAB006"

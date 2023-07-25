@@ -4,15 +4,17 @@
 
 
 # Default GPG Key
-export DEFAULT_PGP_KEY="0x56CC6498381FD53F"
-export PGP_KEY_ID="0x56CC6498381FD53F"
+export \
+  DEFAULT_PGP_KEY="0x56CC6498381FD53F" \
+  PGP_KEY_ID="0x56CC6498381FD53F"
 
 # export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-export GPGHOME=$HOME/.gnupg
-export GPG_LOG_FILE="${GPGHOME}/gpg-agent.log"
+export \
+  GPGHOME="${HOME}/.gnupg" \
+  GPG_LOG_FILE="${GPGHOME}/gpg-agent.log"
 
 # SSH Auth Socket
-export SSH_AUTH_SOCK=$GPGHOME/S.gpg-agent.ssh
+export SSH_AUTH_SOCK="${GPGHOME}/S.gpg-agent.ssh"
 
 # Use Curses for Pinentry
 export GPG_TTY=$(tty)

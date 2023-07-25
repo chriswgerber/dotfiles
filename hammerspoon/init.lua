@@ -12,7 +12,7 @@ hs.loadSpoon("CaffeineBar")
 spoon.CaffeineBar:start()
 
 hs.loadSpoon("Notify")
-spoon.Notify.hostname = "Improving-mbp"
+spoon.Notify.hostname = "Keyva-mbp"
 spoon.Notify:start()
 
 -- hs.loadSpoon("PushToTalk")

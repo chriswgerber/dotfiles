@@ -1,12 +1,5 @@
 # Iterm
 
-autoload -Uz promptinit
-autoload -U add-zsh-hook
-autoload -Uz vcs_info
-setopt prompt_subst
-
-[[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
-
 -dot-fpath-add "${DOTFILES_DIR}/iterm/functions"
 -dot-fpath-add "${DOTFILES_DIR}/iterm/completions" "skip"
 -dot-fpath-add "${DOTFILES_DIR}/iterm/prompts" "skip"

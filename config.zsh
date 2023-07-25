@@ -25,7 +25,6 @@ export DISABLE_AUTO_UPDATE=true
 
 # Configs
 # ======================================
-
 export BUNDLE_ID="com.chriswgerber.dotfiles"
 
 # Data files
@@ -49,6 +48,9 @@ case "$(ls /Users)" in
   ;;
 *chriswgerber)
   export DEFAULT_USER='chriswgerber'
+  ;;
+*chrisgerber)
+  export DEFAULT_USER='chrisgerber'
   ;;
 *)
   unset DEFAULT_USER

@@ -1,18 +1,15 @@
 #!/bin/zsh
 
-export DOTFILES_DIR=$(dirname $0)
-# export DOT_CACHE_DIR="${DOTFILES_DIR}/.cache"
-export DOT_CACHE_DIR="${HOME}/Library/Caches/com.chriswgerber.dotfiles"
+export DOTFILES_DIR=$(dirname $0);
+export AZIMUTH_REPO_URL="https://github.com/ThatGerber/azimuth.git";
+export DOT_CACHE_DIR="${HOME}/Library/Caches/com.chriswgerber.dotfiles";
 
-export AZIMUTH_REPO_URL="https://github.com/ThatGerber/azimuth.git"
-
-function init_azimuth() {
+function bootstrap_azimuth() {
   # Azimuth Framework Library
   # -------------------------
-
-  local _tmp \
-    _azimuth="${1:=${DOT_CACHE_DIR}/azimuth}" \
-    _repo_loc=${2:=${AZIMUTH_REPO_URL}}
+  local _tmp;
+  local _azimuth="${1:=${DOT_CACHE_DIR}/azimuth}";
+  local _repo_loc=${2:=${AZIMUTH_REPO_URL}};
 
   if ! test -d "${_azimuth}"; then
     mkdir -p "$(dirname ${_azimuth})";
@@ -26,6 +23,6 @@ function init_azimuth() {
 }
 
 # Main
-source "$(init_azimuth)/main.zsh"
+source "$(bootstrap_azimuth)/main.zsh";
 
--dot-main ${DOTFILES_DIR}
+-dot-main ${DOTFILES_DIR};

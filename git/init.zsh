@@ -4,4 +4,4 @@
 -dot-symlink-update git/gitk .gitk
 -dot-symlink-update git/hub-config.toml $HUB_CONFIG
 
-export_github_key
+# export_github_key

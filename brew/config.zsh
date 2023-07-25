@@ -19,7 +19,9 @@ export HOMEBREW_CELLAR="${HOMEBREW_PREFIX}/Cellar"
 
 export HOMEBREW_INSTALL_BADGE="🦍"
 export BREW_CLEANUP_PRUNE_DAYS=14
+export HOMEBREW_CLEANUP_MAX_AGE_DAYS=14
 export BREW_FILE="${DOTFILES_DIR}/brew/Brewfile"
+export HOMEBREW_DISPLAY_INSTALL_TIMES="true"
 
 
 #######
@@ -31,8 +33,8 @@ export MANPATH="${HOMEBREW_PREFIX}/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="${HOMEBREW_PREFIX}/share/info:${INFOPATH:-}";
 
 # Completions
-fpath=("${HOMEBREW_PREFIX}/share/zsh/site-functions" $fpath)
-fpath=("${HOMEBREW_PREFIX}/share/zsh-completions" $fpath)
+-dot-fpath-add "${HOMEBREW_PREFIX}/share/zsh/site-functions" "skip"
+-dot-fpath-add "${HOMEBREW_PREFIX}/share/zsh-completions" "skip"
 
 # Openssl
 -dot-path-add "${HOMEBREW_PREFIX}/opt/openssl@1.1/bin"

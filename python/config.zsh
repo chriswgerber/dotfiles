@@ -12,7 +12,7 @@ export PYTHONIOENCODING='utf8'
 -dot-path-add "${HOMEBREW_PREFIX}/opt/python/libexec/bin"
 
 # Pyenv
-PYENV_BREW_VERSION="${PYENV_BREW_VERSION:=}"
+export PYENV_BREW_VERSION="${PYENV_BREW_VERSION:=}"
 
 # Pyenv Virtualenv
 export PYENV_VIRTUALENV_INIT=1;

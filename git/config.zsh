@@ -1,22 +1,24 @@
 # Git
 
-export PR_CHECKOUT_DIR="${XDG_DATA_HOME}/${BUNDLE_ID}/pull-requests"
-
 -dot-fpath-add "${DOTFILES_DIR}/git/functions"
+
+export PR_CHECKOUT_DIR="${XDG_DATA_HOME}/${BUNDLE_ID}/pull-requests"
 
 
 # Github
 # --------------------------------------
-export HUB_CONFIG="$XDG_CONFIG_HOME/hub"
-# export GITHUB_GIST_URL="https://gist.github.com/"
-export GITHUB_SCHEME="https://"
-export GITHUB_HOST="github.com"
-# export GITHUB_USER="chriswgerber"
-# export GITHUB_USERNAME="${GITHUB_USERNAME}"
+export \
+  HUB_CONFIG="$XDG_CONFIG_HOME/hub" \
+  GITHUB_GIST_URL="https://gist.github.com/" \
+  GITHUB_SCHEME="https://" \
+  GITHUB_HOST="github.com" \
+  GITHUB_USER="chriswgerber" \
+  GITHUB_USERNAME="${GITHUB_USERNAME}"
 
 
 # GitLab
 # --------------------------------------
-export GITLAB_USERNAME="thatgerber"
-export GITLAB_URL="https://gitlab.com/"
-export GITLAB_REGISTRY="registry.gitlab.com"
+export \
+  GITLAB_USERNAME="thatgerber" \
+  GITLAB_URL="https://gitlab.com/" \
+  GITLAB_REGISTRY="registry.gitlab.com"
