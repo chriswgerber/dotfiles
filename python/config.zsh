@@ -25,7 +25,7 @@ export PYENV_VIRTUALENV_VERBOSE_ACTIVATE=true
 # PIP
 export PIP_CONFIG_FILE="${XDG_CONFIG_HOME}/pip/pip.conf"
 export PIP_DOWNLOAD_CACHE="${XDG_CONFIG_HOME}/pip/cache"
-export PIP_CERT="${HOMEBREW_PREFIX}/etc/openssl@1.1/cert.pem"
+export PIP_CERT="${HOMEBREW_PREFIX}/etc/ca-certificates/cert.pem"
 
 # Pushbullet (API Usage)
 export PUSHBULLET_EMAIL="${EMAIL_ADDRESS}"
