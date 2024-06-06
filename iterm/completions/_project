@@ -1,0 +1,7 @@
+#compdef project
+
+local _project_dir="${PROJECTS}/src"
+
+_arguments ':projects:Projects:_dir_list -W "${_project_dir}" -g "*(.)"' && return 0
+
+return 1

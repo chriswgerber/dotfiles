@@ -1,0 +1,26 @@
+#compdef workspace
+
+local _ws_dir="${PROJECTS}/workspaces";
+local _ws_ext="code-workspace";
+
+# _arguments ':workspaces:Workspaces:_files -W "${_ws_dir}" -g "*.${_ws_ext}" -s ".${_ws_ext}"' && return 0
+_arguments ':Workspaces:->dirs'
+
+case "$state" in
+    dirs)
+        local -a _ws_files _ws_args
+
+        _ws_files=$(find "${_ws_dir}" -iname "*.${_ws_ext}" -execdir basename -s ".${_ws_ext}" {} +)
+        _ws_files=$(echo "${_ws_files}" | tr "\n" " ")
+        _ws_args=( ${(z)_ws_files} )
+
+        compadd \
+          -X "%{$fg[yellow]%}-- Workspaces%{$fg[reset]%}" \
+          -W "${_ws_dir}" \
+          -S ".${_ws_ext}" \
+          -f \
+          ${^^_ws_args}
+        ;;
+esac
+
+return 1
