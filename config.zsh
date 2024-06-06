@@ -88,29 +88,28 @@ ZSH_THEME=""
 
 # PLUGINS
 # --------------------------------------
+
+# Remote plugins
+-dot-github-plugin-add scriptingosx/mac-zsh-completions
+-dot-github-plugin-add zsh-users/zsh-autosuggestions
+-dot-github-plugin-add zsh-users/zsh-completions
+-dot-github-plugin-add zsh-users/zsh-syntax-highlighting
+
 plugins=(
   colored-man-pages
-  docker
   git
-  github
   golang
   gradle
   iterm2
-  keychain
+  mac-zsh-completions
   macos
   python
   terraform
-  zsh-completions
   zsh-autosuggestions
+  zsh-completions
   zsh-syntax-highlighting
-  mac-zsh-completions
 )
 
-# Remote plugins
--dot-github-plugin-add zsh-users/zsh-completions
--dot-github-plugin-add zsh-users/zsh-autosuggestions
--dot-github-plugin-add zsh-users/zsh-syntax-highlighting
--dot-github-plugin-add scriptingosx/mac-zsh-completions
 
 # Upgrade Ignore
 # --------------------------------------
@@ -122,5 +121,3 @@ export DOT_UPGRADE_IGNORE=(
   oh-my-zsh
   zsh_custom
 )
-
-export ZSH_DISABLE_COMPFIX="true"

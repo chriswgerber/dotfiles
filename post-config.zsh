@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+# Additional Paths
+# ======================================
+-dot-path-add "/Applications/BetterDisplay.app/Contents/MacOS"
+
 
 # Aliases
 # ======================================

@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+autoload -Uz compinit
+compinit
+
 # Init OMZ
 -dot-file-source "${ZSH}/oh-my-zsh.sh"
 

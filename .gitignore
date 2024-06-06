@@ -2,14 +2,10 @@
 
 *.zwc
 
-/secrets.zsh
-/.cache
-/zsh_custom/plugins
-
 # Credentials
 /aws/credentials
 /aws/config
 /aws/creds-vault/vault.log
 
-
+# Only use locally compiled completions
 **/completions/*

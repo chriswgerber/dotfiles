@@ -1,13 +1,10 @@
 #!/bin/zsh
 
-local \
-  _src_dir="${PROJECTS}" \
-  _p_dir="src" \
-  _p_path _p_file _target
+local _src_dir="${PROJECTS}/src";
+local _target;
 
-_p_path="${_src_dir}/${_p_dir}"
 # Strip Path
-_target="${_p_path}/${1#$_p_path/}"
+_target="${_src_dir}/${1#$_src_dir/}"
 
 edit "${_target}"
 

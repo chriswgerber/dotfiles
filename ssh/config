@@ -1,3 +1,5 @@
+Include /Users/chrisgerber/.colima/ssh_config
+
 Host gateway
     HostName 192.168.1.1
     User ubnt
@@ -12,7 +14,7 @@ Host controller
     User root
     PreferredAuthentications publickey,password
 
-Host 192.168.*
+Host 192.168.1.*
     PreferredAuthentications publickey
 
 Host bitbucket.org
