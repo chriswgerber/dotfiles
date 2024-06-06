@@ -34,6 +34,9 @@ export XDG_CACHE_HOME="${HOME}/Library/Caches"
 # Configs
 export XDG_CONFIG_HOME="${HOME}/.config"
 
+# Manpages
+export MANCOLOR='true'
+
 
 if [ -d $HOME/projects ]; then
     export PROJECTS="${HOME}/Projects"

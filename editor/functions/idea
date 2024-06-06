@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+set -v
+
+open -na "${INTELLIJ_APP_NAME}" --args "$(realpath $1)"

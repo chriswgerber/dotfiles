@@ -45,6 +45,10 @@ indent_style = tab
 [*.mk]
 indent_style = tab
 
+# CSS
+[*.{css,scss}]
+indent_size = 2
+
 # Other languages
-[*.{puml,lua,php,py,scss,cf.yml,cf.yaml}]
+[*.{puml,lua,php,py,cf.yml,cf.yaml}]
 indent_size = 4

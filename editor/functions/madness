@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+local image="dannyben/madness";
+local port="${SERVER_PORT:-3000}";
+
+
+(
+  set -x
+
+  docker run \
+    --rm -it \
+    --name $(basename $PWD)-md-server \
+    -p "${port}:80" \
+    -v $PWD:/docs \
+    "${image}" \
+    $@
+)
