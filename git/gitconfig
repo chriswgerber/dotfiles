@@ -8,7 +8,8 @@
     pull-dirs     = "!(ls | xargs -P4 -I{} git -C {} pull --all --ff-only)"
     tinylog       = "!git log --oneline --graph --decorate"
     root          = "!git exec pwd"
-    checkout-pr   = "!checkout_pr "
+    checkout-pr   = ! sh -c 'zsh -ilc \"checkout_pr $@\"' --
+    return        = "! echo \"$HOME/Projects/src/$(git remote get-url origin | tr ':' '/' | cut -d '@' -f 2 /dev/stdin | cut -d '.' -f 1,2 /dev/stdin)\""
 
 [color]
     ui = true

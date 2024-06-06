@@ -52,3 +52,7 @@ Temporary Items
 # Extra
 /scratch
 /.scratch
+
+# Ansible
+# Vault config files
+.vault_cfg

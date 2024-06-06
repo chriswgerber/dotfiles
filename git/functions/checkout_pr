@@ -1,26 +1,37 @@
 #!/bin/zsh
 
-local _branch="${1}"; # Checkout branch
 local _cur_repo="$(git remote get-url origin)";
-local _repo="${2:=${_cur_repo}}";
 local _ref_repo="$(git root)";
-local _tmpdir="${PR_CHECKOUT_DIR:=$(mktemp -d)}/$(basename ${_ref_repo})";
-local _target_dir="${_tmpdir}/$(tr "/" "-" <<< "${_branch}")"
+local _workdir="${PR_CHECKOUT_DIR:=$(mktemp -d)}/$(basename ${_ref_repo})";
+local _editor="${DOT_IDE:=code}";
+
+if test -z $1; then
+  echo "usage: git checkout-pr BRANCH_NAME [REMOTE_REPO]"
+  return
+fi
+
+local _branch="${1}"; # Checkout branch
+local _repo="${2:=${_cur_repo}}";
+local _target_dir="${_workdir}/$(tr "/" "-" <<< "${_branch}")"
 
 (
   set -v
 
-  mkdir -p "${_tmpdir}" || true
+  if test -d "${_target_dir}/.git"; then
+    cd "${_target_dir}";
+  else
+    mkdir -p "${_workdir}" || true
+    git clone \
+      --reference-if-able "${_ref_repo}" \
+      -b "${_branch}" \
+      "${_repo}" \
+      "${_target_dir}"
+  fi
 
-  git clone \
-    --reference-if-able "${_ref_repo}" \
-    --single-branch -b "${_branch}" \
-    "${_repo}" \
-    "${_target_dir}"
+  ( "${_editor}" "${_target_dir}" ) &
 
-  ( edit "${_target_dir}" ) &
 
-  cd "${_target_dir}"
+  new_tab "${_target_dir}"
 
   wait;
 )

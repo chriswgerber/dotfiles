@@ -1,0 +1,8 @@
+#!/bin/bash
+
+_cur_dir="$(dirname "$0")"
+_cur_hook="$(basename "$0")"
+
+source "${_cur_dir}/lib.sh";
+
+run_hooks_d "${_cur_dir}" "${_cur_hook}"
