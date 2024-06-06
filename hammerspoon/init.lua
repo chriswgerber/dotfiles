@@ -1,5 +1,4 @@
 hs.printf("hs.configdir = %s", hs.configdir)
-
 dot_spoons_dir = hs.configdir .. "/Spoons"
 hs.printf("Extra spoons dir %s", dot_spoons_dir)
 
@@ -12,15 +11,20 @@ package.path = dot_spoons_dir .. "/?.lua;" .. package.path
 -- ===========
 
 
--- Caffeinate plugin
+-- Caffeinate
 hs.loadSpoon("CaffeineBar")
 spoon.CaffeineBar:start()
 
 
--- Notify plugin
+-- Notify
 hs.loadSpoon("Notify")
 spoon.Notify.hostname = "Keyva-mbp"
 spoon.Notify:start()
+
+
+-- VPNDaemon
+hs.loadSpoon("VPNDaemon")
+spoon.VPNDaemon:start()
 
 
 -- Streamdeck plugin

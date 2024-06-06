@@ -8,16 +8,16 @@ CaffeineBar = {
     author   = "chriswgerber <chriswgerber@gmail.com>",
     homepage = "https://www.chriswgerber.com",
     license  = "MIT - https://opensource.org/licenses/MIT",
----
+    ---
     menuID      = "com.chriswgerber.CaffeineBar",
     settingsKey = "CaffeineBar_enable",
     sleepType   = "displayIdle",
----
+    ---
     logger  = hs.logger.new('Caff.Bar', 'debug'),
     menubar = nil,
     watcher = CaffeineWatcher,
     hotkeys = {},
----
+    ---
     bindings = {
         enable = {
             {"cmd", "alt"},
@@ -38,7 +38,6 @@ local CaffeineStates = {
     ON = "on",
     OFF = "off",
 }
-
 
 --- View states
 menuIcons = {
