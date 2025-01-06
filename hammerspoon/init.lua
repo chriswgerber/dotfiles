@@ -22,9 +22,9 @@ spoon.Notify.hostname = "Keyva-mbp"
 spoon.Notify:start()
 
 
--- VPNDaemon
-hs.loadSpoon("VPNDaemon")
-spoon.VPNDaemon:start()
+-- -- VPNDaemon
+-- hs.loadSpoon("VPNDaemon")
+-- spoon.VPNDaemon:start()
 
 
 -- Streamdeck plugin

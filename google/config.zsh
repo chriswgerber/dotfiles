@@ -8,5 +8,6 @@ export GCLOUDSDKPATH="${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google
 
 test -r "${GCLOUDSDKPATH}/path.zsh.inc" &&
   source "${GCLOUDSDKPATH}/path.zsh.inc";
+
 test -r "${GCLOUDSDKPATH}/completion.zsh.inc" &&
   source "${GCLOUDSDKPATH}/completion.zsh.inc";

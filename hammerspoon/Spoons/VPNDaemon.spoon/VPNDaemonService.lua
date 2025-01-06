@@ -10,31 +10,34 @@ VPNDaemonService = {
     homepage = "https://www.chriswgerber.com",
     license  = "MIT - https://opensource.org/licenses/MIT",
     ---
-    menuID      = "com.chriswgerber.VPNDaemonService",
-    settingsKeys = {
-        "State:/Network/Interface/ppp0/IPv4",
-        "State:/Network/Global/DNS",
-        "Setup:/Network/Service/[A-Z0-9\\-]+/DNS"
-    },
-    inetKey = "State:/Network/Interface/ppp0/IPv4",
-    dnsKey = "Setup:/Network/Service/[A-Z0-9\\-]+/DNS",
-    -- dnsKey = "State:/Network/Global/DNS",
+    menuID       = "com.chriswgerber.VPNDaemonService",
+    globalDNSKey = "State:/Network/Global/DNS",
+    inetKey      = "State:/Network/Interface/ppp0/IPv4",
+    dnsKey       = "Setup:/Network/Service/.*/DNS",
+    settingsKeys = {},
     ---
-    logName = 'VPNDaemonService',
+    logName  = 'VPNDaemonService',
     logLevel = 'info',
-    logger  = nil,
+    logger   = nil,
+    ---
     menuIcon = nil,
     networkState = {
-        DNS = nil,
+        DNS  = nil,
         IPv4 = {
             localAddr = nil,
             targetAddr = nil,
         },
     },
 }
+VPNDaemonService.settingsKeys = {
+    VPNDaemonService.globalDNSKey,
+    VPNDaemonService.inetKey,
+    VPNDaemonService.dnsKey,
+}
 VPNDaemonService.__index = VPNDaemonService
 
---- VPNDaemonService:watchSetting()
+
+--- VPNDaemonService:watchSetting(config, keys)
 --- Method
 --- A method called when there is a change to the setting.
 ---
@@ -42,19 +45,42 @@ VPNDaemonService.__index = VPNDaemonService
 ---  * Nil
 function VPNDaemonService:watchSetting(config, keys)
     self.logger.i("settings:watcher:called")
-
     self.logger.d("Dumping Network Config")
-    self.logger.d(Util:dump(keys))
-    self.logger.d(Util:dump(config:contents(keys, true)))
+    self.logger.d("Keys:", Util:dump(keys))
+    self.logger.d("Contents:", Util:dump(config:contents(keys, true)))
 
-    self:updateNetworkState(config:contents(self.inetKey), config:contents(self.dnsKey, true))
+    self:updateNetworkState(config:contents(self.inetKey), config:contents({ self.globalDNSKey, self.dnsKey }, true))
 
-    self.logger.d(string.format("networkState: %s", Util:dump(self.networkState)))
+    self.logger.d("networkState:", Util:dump(self.networkState))
 
     self:updateState(self.networkState)
 end
 
 
+--- VPNDaemonService:getResolvConf
+--- Method
+---
+--- Returns:
+---  * Nil
+function VPNDaemonService:getResolvConf(search)
+    local servers = {}
+    for line in io.lines("/etc/resolv.conf") do
+        st, en = string.find(line, search)
+        if st ~= nil then
+            servers[string.sub(line, en+1, string.len(line))] = true
+        end
+    end
+
+    return servers
+end
+
+
+--- VPNDaemonService:updateNetworkState(ipv4Config, dnsConfig)
+--- Method
+--- Updates the internally stored network state based on the provided configurations.
+---
+--- Returns:
+---  * Nil
 function VPNDaemonService:updateNetworkState(ipv4Config, dnsConfig)
     if ipv4Config[self.inetKey] ~= nil then
         self.networkState.IPv4 = {
@@ -66,16 +92,19 @@ function VPNDaemonService:updateNetworkState(ipv4Config, dnsConfig)
             localAddr = nil,
             targetAddr = nil,
         }
-
     end
-    self.networkState.DNS = nil
-    self.logger.d(Util:dump(dnsConfig))
+    self.networkState.DNS = VPNDaemonService:getResolvConf("nameserver ")
+    self.logger.d("network DNS", Util:dump(self.networkState.DNS))
+    self.logger.d("dnsConfig", Util:dump(dnsConfig))
     for key, val in pairs(dnsConfig) do
-        self.networkState.DNS = "[" .. table.concat(val['ServerAddresses'], ', ') .. "]"
+        for key2, val2 in pairs(val['ServerAddresses']) do
+            self.networkState.DNS[val2] = true
+        end
     end
 end
 
---- VPNDaemonService:updateState(state)
+
+--- VPNDaemonService:updateState(config)
 --- Method
 --- Updates the display of the menu bar based on the current state.
 ---

@@ -11,17 +11,23 @@ function _proxy_show(){
 }
 
 function _proxy_on(){
-  export ALL_PROXY=${CHARLES_PROXY}
-
-  export HTTP_PROXY=$ALL_PROXY
-  export http_proxy=$ALL_PROXY
-  export HTTPS_PROXY=$ALL_PROXY
-  export https_proxy=$ALL_PROXY
+  # All (Default)
+  export ALL_PROXY=${CHARLES_HOST}
+  export all_proxy=${ALL_PROXY}
+  # HTTP
+  export HTTP_PROXY=$CHARLES_PROXY
+  export http_proxy=${HTTP_PROXY}
+  # HTTPS
+  export HTTPS_PROXY=$CHARLES_PROXY
+  export https_proxy=${HTTPS_PROXY}
+  # Others
+  export FTP_PROXY=$ALL_PROXY
   export ftp_proxy=$ALL_PROXY
   export RSYNC_PROXY=$ALL_PROXY
   export rsync_proxy=$ALL_PROXY
+  # No Proxy
   export NO_PROXY=$CHARLES_NO_PROXY
-  export no_proxy=$NO_PROXY
+  export no_proxy="${NO_PROXY}"
 }
 
 function _proxy_off(){

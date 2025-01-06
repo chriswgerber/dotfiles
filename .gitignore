@@ -9,3 +9,6 @@
 
 # Only use locally compiled completions
 **/completions/*
+!aws/completions/_asp
+!iterm/completions/_project
+!iterm/completions/_workspace

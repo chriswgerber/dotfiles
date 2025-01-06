@@ -8,12 +8,13 @@ VPNDaemon = {
     logLevel = 'info',
     logger   = nil,
     ---
-    networkConfig     = hs.network.configuration.open(),
+    networkConfig = hs.network.configuration.open(),
 }
 VPNDaemon.settingsCallback = function(a, b)
     VPNDaemon.spoon:watchSetting(a, b)
 end
 VPNDaemon.__index = VPNDaemon
+
 
 --- VPNDaemon:init()
 --- Method
@@ -28,6 +29,7 @@ function VPNDaemon:init()
     -- Create Menubar
     self.spoon.menuIcon = MenuItem:new{menuID = self.spoon.menuID}
 end
+
 
 --- VPNDaemon:start()
 --- Method

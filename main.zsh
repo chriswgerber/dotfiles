@@ -1,12 +1,8 @@
 #!/bin/zsh
 
-export DOTFILES_DIR=$(dirname $0);
-export AZIMUTH_REPO_URL="https://github.com/ThatGerber/azimuth.git";
-
-# I wish I could get this dynamically since it is declared later, but I can't.
-export DOT_CACHE_DIR="${HOME}/Library/Caches/com.chriswgerber.dotfiles";
-
-
+# Clone/install Azimuth and get path to the cloned repo.
+#
+# Returns the path to the cloned repository.
 function bootstrap_azimuth() {
   # Azimuth Framework Library
   # -------------------------
@@ -25,7 +21,13 @@ function bootstrap_azimuth() {
   printf "%s" "${_azimuth}"
 }
 
-# Main
+
+export DOTFILES_DIR=$(dirname $0);
+export AZIMUTH_REPO_URL="https://github.com/chriswgerber/azimuth.git";
+# I wish I could get this dynamically since it is declared later, but I can't.
+export DOT_CACHE_DIR="${HOME}/Library/Caches/com.chriswgerber.dotfiles";
+
+# Call Main
 source "$(bootstrap_azimuth)/main.zsh";
 
 

@@ -1,5 +1,9 @@
 --- Util
+table.unpack = table.unpack or unpack -- 5.1 compatibility
+
+
 Util = {}
+
 
 function Util:dump(o)
     if type(o) == 'table' then

@@ -1,0 +1,29 @@
+#!/bin/zsh
+(
+  case $1 in
+    green)
+      _r="62";
+      _g="231";
+      _b="45";
+      echo -e "\033]6;1;bg;red;brightness;${_r}\a"
+      echo -e "\033]6;1;bg;green;brightness;${_g}\a"
+      echo -e "\033]6;1;bg;blue;brightness;${_b}\a"
+      ;;
+    red)
+      _r="244";
+      _g="84";
+      _b="50";
+      echo -e "\033]6;1;bg;red;brightness;${_r}\a"
+      echo -e "\033]6;1;bg;green;brightness;${_g}\a"
+      echo -e "\033]6;1;bg;blue;brightness;${_b}\a"
+      ;;
+    orange)
+      _r="231";
+      _g="143";
+      _b="45";
+      echo -e "\033]6;1;bg;red;brightness;${_r}\a"
+      echo -e "\033]6;1;bg;green;brightness;${_g}\a"
+      echo -e "\033]6;1;bg;blue;brightness;${_b}\a"
+      ;;
+  esac
+)
