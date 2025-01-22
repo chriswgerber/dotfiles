@@ -301,9 +301,7 @@ def main():
         )
         Printer.echo("Install missing extensions: ")
     for r in missing:
-        if not config.query:
-            to_install.append(r)
-        elif Printer.query_yes_no("{ext.name} @ {ext.version}?".format(ext=r), "Yes"):
+        if not config.query or Printer.query_yes_no("{ext.name} @ {ext.version}?".format(ext=r), "Yes"):
             to_install.append(r)
 
     if to_install:
@@ -330,9 +328,7 @@ def main():
         Printer.echo("Extra extensions: {}".format([str(a) for a in extra]))
         Printer.echo("Uninstall extra extensions: ")
     for r in extra:
-        if not config.query:
-            to_remove.append(r)
-        elif Printer.query_yes_no("{ext.name} @ {ext.version}?".format(ext=r), "Yes"):
+        if not config.query or Printer.query_yes_no("{ext.name} @ {ext.version}?".format(ext=r), "Yes"):
             to_remove.append(r)
 
     if to_remove:
@@ -345,7 +341,7 @@ def main():
             code.extensions.remove(r)
 
     # ------
-    if to_install or to_remove:
+    if missing or extra:
         config.update_file(code)
 
     logging.info("Finished updating VS Code extensions.")

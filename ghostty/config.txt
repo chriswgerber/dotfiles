@@ -1,0 +1,7 @@
+# theme = Guezwhoz
+theme = Argonaut
+# theme = Abernathy
+
+font-thicken = false
+
+cursor-style = block_hollow
