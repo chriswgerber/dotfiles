@@ -41,3 +41,22 @@ To upgrade Homebrew and all associated projects, call `-dot-azimuth-update`. Thi
 4. Find and invoke upgrade files `$DOTFILES_DIR/*/upgrade.zsh`
 5. Upgrade all repos in `$DOT_CACHE_DIR` not denylisted by `DOT_UPGRADE_IGNORE` in `config.zsh`
 6. Recompile all `$DOTFILES_DIR/*/functions` and `$DOTFILES_DIR/*/completions` directories
+
+## Secrets
+
+### Create New Secret
+
+Pull value from MacOS Keychain
+
+All args are optional, but require "" to avoid moving them positionally if an argument
+is blank.
+
+Usage:
+  1 - Service Name. Usually URL.
+  2 - Account name. Usually username.
+  3 - Comment. Additional filtering description.
+  4 - Label
+
+```Shell
+$ keychain_set_value "URL" "USERNAME" "NOTE" "ADDL_LABEL"
+```

@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+local username="${1:=${AZDO_USER}}";
+local azdo_host="${2:=${AZDO_URL_HOST}}";
+local azdo_scheme="${3:=${AZDO_URL_SCHEME}}";
+local azdo_url="${azdo_scheme}${azdo_host}";
+
+( test -n "${username}" && test -n "${azdo_url}" ) &&
+  export AZDO_TOKEN="$(keychain_get_value ${azdo_url} ${username})"

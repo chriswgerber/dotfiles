@@ -1,0 +1,37 @@
+#!/bin/zsh
+
+local display_command="$(command -v BetterDisplay)";
+local display_name;
+local display_input;
+
+case "${1}" in
+  *${DISPLAY_1_NAME}*)
+    display_name="${DISPLAY_1_NAME}";
+    ;;
+  *${DISPLAY_2_NAME}*)
+    display_name="${DISPLAY_2_NAME}";
+    ;;
+  *)
+    printf "Unable to locate display: %s\n" "${1}";
+    return 1;
+    ;;
+esac
+
+case "${2}" in
+  *h*|*H*)
+    display_input="${DISPLAY_VCP_INPUT_HDMI}";
+    ;;
+  *d*|*D*)
+    display_input="${DISPLAY_VCP_INPUT_DP}";
+    ;;
+  *)
+    printf "Unable to locate input type: %s\n" "${2}";
+    return 1;
+    ;;
+esac
+
+"${display_command}" set \
+  -namelike="${display_name}" \
+  -feature=ddc \
+  -vcp="${DISPLAY_VCP_INPUT_SELECT}" \
+  -value="${display_input}"

@@ -1,0 +1,90 @@
+#!/bin/zsh
+
+function _msc_get_filename() {
+  local _filepath="${1}";
+  local _resultpath;
+
+  if test -n "$(readlink -fn "${_filepath}")"; then
+    _resultpath="$(readlink -fn "${_filename}")";
+  else
+    _resultpath="${_filepath}";
+  fi
+
+  printf '%s' "${_resultpath}";
+}
+
+function msc_help_text() {
+  cat <<- EndOfHelp
+    manage_ssh_config (add|remove|edit|list|help) [FILENAME]
+EndOfHelp
+}
+
+function msc_get_config_file() {
+  local _ssh_config_file="${HOME}/.ssh/managed-config";
+
+  test -s "${_ssh_config_file}" || {
+    mkdir -p "$(dirname ${_ssh_config_file})";
+    echo '# SSH Config' >>"${_ssh_config_file}"
+  };
+
+  print "${_ssh_config_file}";
+}
+
+function msc_add_file() {
+  local _filename="${1}";
+  local _resolved_file="$(_msc_get_filename "${_filename}")"
+  local _config="$(msc_get_config_file)";
+
+  grep "${_resolved_file}" "${_config}" >>/dev/null || {
+    echo "Adding ${_resolved_file}";
+    echo "Include ${_resolved_file}" >> "${_config}";
+  }
+}
+
+function msc_edit_file() {
+  local _config="$(msc_get_config_file)";
+
+  $EDITOR "${_config}";
+}
+
+function msc_remove_file() {
+  local _filename="${1}";
+  local _resolved_file="$(_msc_get_filename "${_filename}")";
+  local _config="$(msc_get_config_file)";
+
+  grep "${_resolved_file}" "${_config}" >>/dev/null && {
+    printf "Removing %s\n" "${_resolved_file}";
+    sed -i'' -e "\|${_resolved_file}|d" "${_config}";
+  }
+}
+
+function msc_list_file() {
+  local _config="$(msc_get_config_file)";
+
+  cat "${_config}";
+}
+
+(
+  set -eo pipefail
+
+  action="${1}";
+  target_file="${2}";
+
+  case "${action}" in
+  a*)
+    msc_add_file "${target_file}";
+    ;;
+  (r|d)*)
+    msc_remove_file "${target_file}";
+    ;;
+  l*)
+    msc_list_file;
+    ;;
+  e*)
+    msc_edit_file;
+    ;;
+  *)
+    msc_help_text
+    ;;
+  esac
+)
