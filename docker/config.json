@@ -1,8 +1,11 @@
 {
-	"auths": {},
+	"auths": {
+		"harbor.cgerber.local": {},
+		"registry.cgerber.local": {},
+		"registry.cgerber.local:80": {}
+	},
 	"credsStore": "osxkeychain",
 	"credHelpers": {
 		"registry.gitlab.com": "osxkeychain"
-	},
-	"currentContext": "colima"
+	}
 }
