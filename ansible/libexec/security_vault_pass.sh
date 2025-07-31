@@ -7,17 +7,18 @@
 #
 #     Can also check file defined in `VAULT_CFG` for service and account variables
 #
-#     Script checks current dir for a file named by `VAULT_CFG_FILE` (.vault_cfg)
+#     Script checks executed/working dir for a file named by `VAULT_CFG_FILE`
+#     (.vault_cfg)
 #
 #     script
 #     script --vault-id 'id'
 #
 # To set a password, use:
-# script set [-r]
-#     -r - Require system password every time to access stored value.
+#     script set [-r]
+#         -r - Require system password every time to access stored value.
 #
 
-vault_cfg=$(pwd)/${VAULT_CFG_FILE}
+vault_cfg="$(pwd)/${VAULT_CFG_FILE}"
 
 if test -r "${vault_cfg}"; then
   source "${vault_cfg}";
@@ -28,32 +29,22 @@ ANSIBLE_SERVICE="${ANSIBLE_SERVICE:?}";
 # Project/Playbook name.
 ANSIBLE_ACCOUNT="${ANSIBLE_ACCOUNT:?}";
 
+script_flags="-w"
+script_flags+=" -s '${ANSIBLE_SERVICE}'"
+script_flags+=" -a '${ANSIBLE_ACCOUNT}'"
+
 case "$1" in
   "--vault-id*" )
-    security find-generic-password -w \
-      -s "${ANSIBLE_SERVICE}" \
-      -a "${ANSIBLE_ACCOUNT}" \
-      -j "${2}";
+    security find-generic-password ${script_flags} -j "${2}";
   ;;
   "set" )
-    if [[ "$*" == *"-r"* ]]; then
-      # Require password each time.
-      security add-generic-password \
-        -s "${ANSIBLE_SERVICE}" \
-        -a "${ANSIBLE_ACCOUNT}" \
-        -T '' \
-        -w;
-    else
-      security add-generic-password \
-        -s "${ANSIBLE_SERVICE}" \
-        -a "${ANSIBLE_ACCOUNT}" \
-        -w;
+    if [[ "$*" == *"-r"* ]]; then # Require password each time.
+      script_flags+=" -T ''"
     fi
+    security add-generic-password ${script_flags};
   ;;
   * )
-    security find-generic-password -w \
-      -s "${ANSIBLE_SERVICE}" \
-      -a "${ANSIBLE_ACCOUNT}";
+    security find-generic-password ${script_flags};
   ;;
 esac
 
